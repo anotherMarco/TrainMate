@@ -32,4 +32,10 @@ public class BodyMeasurementEntity extends BaseEntity {
     @Column(name = "measured_at", nullable = false)
     private LocalDateTime measuredAt;
 
+    public void setUserEntity(UserEntity user) {
+        if (user.getBodyMeasurements().add(this)) {
+            userEntity = user;
+        }
+    }
+
 }

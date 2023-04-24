@@ -29,4 +29,8 @@ public class UserEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.MERGE, orphanRemoval = true)
     private Set<BodyMeasurementEntity> bodyMeasurements = new LinkedHashSet<>();
+
+    public void addMeasurement(BodyMeasurementEntity measurement) {
+        if (bodyMeasurements.add(measurement)) measurement.setUserEntity(this);
+    }
 }

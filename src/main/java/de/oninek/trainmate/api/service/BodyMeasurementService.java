@@ -4,5 +4,5 @@ import de.oninek.trainmate.api.dto.BodyMeasurementResponse;
 import de.oninek.trainmate.api.dto.CreateBodyMeasurementRequest;
 
 public interface BodyMeasurementService {
-    BodyMeasurementResponse save(CreateBodyMeasurementRequest request);
+    BodyMeasurementResponse save(long userId, CreateBodyMeasurementRequest request);
 }
