@@ -1,4 +1,4 @@
-name: on-push-dev
+name: build
 run-name: ${{ github.actor }} push-dev
 on: [push]
 jobs:
