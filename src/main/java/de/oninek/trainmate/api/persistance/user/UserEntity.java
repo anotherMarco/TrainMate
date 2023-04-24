@@ -2,10 +2,13 @@ package de.oninek.trainmate.api.persistance.user;
 
 import de.oninek.trainmate.api.persistance.BaseEntity;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.Hibernate;
 
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -32,5 +35,20 @@ public class UserEntity extends BaseEntity {
 
     public void addMeasurement(BodyMeasurementEntity measurement) {
         if (bodyMeasurements.add(measurement)) measurement.setUserEntity(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserEntity that = (UserEntity) o;
+
+        return email.equals(that.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return email.hashCode();
     }
 }

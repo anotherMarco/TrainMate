@@ -21,6 +21,6 @@ public class TestPostgresContainer extends PostgreSQLContainer<TestPostgresConta
 
     @Override
     public void stop() {
-        // do nothing, container is stopped after all tests are run
+
     }
 }

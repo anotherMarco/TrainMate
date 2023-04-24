@@ -1,10 +1,9 @@
 package de.oninek.trainmate.api.persistance.user;
 
+import de.oninek.trainmate.api.TestPostgresContainer;
 import de.oninek.trainmate.api.exceptions.UserNotFoundException;
 import jakarta.persistence.EntityManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -26,10 +25,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @TestPropertySource(properties = "spring.jpa.hibernate.ddl-auto=create-drop")
 @Testcontainers
 @EnableJpaAuditing
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class UserRepositoryTest {
 
     @Container
-    static PostgreSQLContainer testContainer = new PostgreSQLContainer<>("postgres:13");
+    static PostgreSQLContainer<TestPostgresContainer> testContainer = TestPostgresContainer.getInstance();
 
     @DynamicPropertySource
     static void properties(DynamicPropertyRegistry registry) {
@@ -47,6 +47,7 @@ class UserRepositoryTest {
 
     @BeforeEach
     void setUp() {
+        repository.deleteAll();
     }
 
     @AfterEach
@@ -76,7 +77,18 @@ class UserRepositoryTest {
         assertThat(entities).hasSize(1);
     }
 
+    @Test
+    void add_measurement() {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setLastName("John");
+        userEntity.setDisplayName("john.doe");
+        userEntity.setEmail("john.doe@example.com");
+        BodyMeasurementEntity bodyMeasurement = new BodyMeasurementEntity();
+        userEntity.addMeasurement(bodyMeasurement);
 
+        UserEntity userResult = repository.save(userEntity);
 
-
+        assertThat(userResult.getBodyMeasurements()).hasSize(1);
+        assertThat(userResult.getBodyMeasurements().stream().findFirst()).get().isEqualTo(bodyMeasurement);
+    }
 }
