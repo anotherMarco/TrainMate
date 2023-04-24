@@ -5,11 +5,13 @@ import de.oninek.trainmate.api.dto.CreateBodyMeasurementRequest;
 import de.oninek.trainmate.api.service.BodyMeasurementService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
 @RequiredArgsConstructor
+@RestController
 public class MeasurementControllerImpl implements MeasurementController {
 
     private final BodyMeasurementService service;
