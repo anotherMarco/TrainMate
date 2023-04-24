@@ -6,7 +6,7 @@ import de.oninek.trainmate.api.dto.UserResponse;
 
 public interface UserService {
 
-    UserResponse findById(Long id);
+    UserResponse findById(long id);
 
     UserResponse save(CreateUserRequest request);
 }

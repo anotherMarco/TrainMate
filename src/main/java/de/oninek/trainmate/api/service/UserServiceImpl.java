@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper mapper;
     @Override
-    public UserResponse findById(Long id) {
+    public UserResponse findById(long id) {
         UserEntity entity = userRepository.findByIdOrThrow(id);
         return mapper.entityToResponse(entity);
     }
@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService {
     public UserResponse save(CreateUserRequest request) {
         UserEntity userEntity = mapper.requestToEntity(request);
         UserEntity saved = userRepository.save(userEntity);
+
         return mapper.entityToResponse(saved);
     }
 }
