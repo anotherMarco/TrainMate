@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 public record CreateUserRequest(
-
         @Schema(example = "John") String firstName,
         @Schema(example = "Doe") String lastName,
         @Schema(example = "john.doe@example.com") @Email String email,

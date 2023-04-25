@@ -1,4 +1,4 @@
-package de.oninek.trainmate.api.config;
+package de.oninek.trainmate.api.common.config;
 
 
 import org.springframework.context.annotation.Configuration;
