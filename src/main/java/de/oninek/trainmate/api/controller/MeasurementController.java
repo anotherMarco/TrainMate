@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface MeasurementController {
 
     @GetMapping
-    @ApiResponse(responseCode = "404", description = "user not found")
     ResponseEntity<BodyMeasurementResponse> save(@PathVariable(value = "user-id") long userId,
                                                  @RequestBody CreateBodyMeasurementRequest request);
 }
