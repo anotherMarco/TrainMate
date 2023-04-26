@@ -5,16 +5,13 @@ import de.oninek.trainmate.api.dto.CreateBodyMeasurementRequest;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Measurements")
-@RequestMapping("{user-id}/measurements")
+@RequestMapping("users/{user-id}/measurements")
 public interface MeasurementController {
 
-    @GetMapping
+    @PostMapping
     ResponseEntity<BodyMeasurementResponse> save(@PathVariable(value = "user-id") long userId,
                                                  @RequestBody CreateBodyMeasurementRequest request);
 }
