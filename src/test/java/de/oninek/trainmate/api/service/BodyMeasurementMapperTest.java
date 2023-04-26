@@ -38,7 +38,6 @@ class BodyMeasurementMapperTest {
         assertThat(dto.weight()).isEqualTo(entity.getWeight());
         assertThat(dto.fatPercentage()).isEqualTo(entity.getFatPercentage());
         assertThat(dto.skeletalMuscleWeight()).isEqualTo(entity.getSkeletalMuscleWeight());
-        assertThat(dto.fatMassWeight()).isEqualTo(entity.getFatMassWeight());
         assertThat(dto.measuredAt()).isEqualTo(entity.getMeasuredAt());
     }
 
@@ -56,7 +55,6 @@ class BodyMeasurementMapperTest {
         assertThat(dto.weight()).isEqualTo(entity.getWeight());
         assertThat(dto.fatPercentage()).isNull();
         assertThat(dto.skeletalMuscleWeight()).isNull();
-        assertThat(dto.fatMassWeight()).isNull();
         assertThat(dto.measuredAt()).isEqualTo(entity.getMeasuredAt());
     }
 

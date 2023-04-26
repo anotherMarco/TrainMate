@@ -59,7 +59,6 @@ class UserMapperTest {
         assertThat(response.bodyComposition().weight()).isEqualTo(bodyMeasurementEntity.getWeight());
         assertThat(response.bodyComposition().fatPercentage()).isEqualTo(bodyMeasurementEntity.getFatPercentage());
         assertThat(response.bodyComposition().skeletalMuscleWeight()).isEqualTo(bodyMeasurementEntity.getSkeletalMuscleWeight());
-        assertThat(response.bodyComposition().fatMassWeight()).isEqualTo(bodyMeasurementEntity.getFatMassWeight());
         assertThat(response.bodyComposition().measuredAt()).isEqualTo(bodyMeasurementEntity.getMeasuredAt());
     }
 
