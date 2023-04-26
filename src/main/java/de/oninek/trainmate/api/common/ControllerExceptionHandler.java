@@ -36,7 +36,7 @@ public class ControllerExceptionHandler {
     @ExceptionHandler
     @ApiResponse(
             responseCode = "404",
-            description = "measurement not found",
+            description = "measurement   not found",
             content = {@Content(
                     mediaType = APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ProblemDetail.class))})
