@@ -21,6 +21,7 @@ public interface UserController {
             headers = {@Header(name = HttpHeaders.LOCATION, description = "The uri where the created resource can be found")},
             content = @Content(mediaType = APPLICATION_JSON_VALUE)
     )
+    @ApiResponse(responseCode = "409", description = "Conflict")
     @PostMapping
     ResponseEntity<UserResponse> save(@Valid @RequestBody CreateUserRequest request);
 

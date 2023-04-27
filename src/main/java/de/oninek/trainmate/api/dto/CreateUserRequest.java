@@ -6,10 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 
-public record CreateUserRequest(
-        @Schema(example = "John") String firstName,
-        @Schema(example = "Doe") String lastName,
-        @Schema(example = "john.doe@example.com") @Email String email,
-        @Schema(example = "j0hnDoE") @NotBlank String displayName
-) implements Serializable {
+public record CreateUserRequest(@Schema(example = "John") @NotBlank String firstName,
+                                @Schema(example = "Doe") @NotBlank String lastName,
+                                @Schema(example = "john.doe@example.com") @NotBlank @Email String email,
+                                @Schema(example = "j0hnDoE") @NotBlank String displayName) implements Serializable {
 }

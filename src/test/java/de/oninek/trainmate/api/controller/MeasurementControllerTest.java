@@ -30,7 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(MeasurementController.class)
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-@AutoConfigureJsonTesters
 class MeasurementControllerTest {
 
     @MockBean
@@ -39,18 +38,18 @@ class MeasurementControllerTest {
     private UserService userService;
     @Autowired
     private MockMvc mockMvc;
+    @Autowired
+    ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
         JacksonTester.initFields(this, new ObjectMapper());
     }
 
-    private JacksonTester<CreateBodyMeasurementRequest> requestJacksonTester;
-
     @Test
     public void when_user_not_found_return_404() throws Exception {
         CreateBodyMeasurementRequest measurement = new CreateBodyMeasurementRequest(72.0, 15.0, 33.0, LocalDateTime.of(2023, 12, 25, 0, 0));
-        String jsonRequest = requestJacksonTester.write(measurement).getJson();
+        String jsonRequest = objectMapper.writeValueAsString(measurement);
         when(measurementService.save(anyLong(), any())).thenThrow(UserNotFoundException.class);
 
         mockMvc.perform(post("/users/1/measurements")
