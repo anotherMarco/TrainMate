@@ -40,7 +40,7 @@ class UserMapperTest {
         BodyMeasurementEntity bodyMeasurementEntity = new BodyMeasurementEntity();
         bodyMeasurementEntity.setId(1L);
         bodyMeasurementEntity.setWeight(70.0);
-        bodyMeasurementEntity.setFatPercentage(25.0);
+        bodyMeasurementEntity.setFatMassWeight(25.0);
         bodyMeasurementEntity.setSkeletalMuscleWeight(50.0);
         bodyMeasurementEntity.setFatMassWeight(17.5);
         bodyMeasurements.add(bodyMeasurementEntity);
@@ -57,7 +57,7 @@ class UserMapperTest {
         assertThat(response.bodyComposition()).isNotNull();
         assertThat(response.bodyComposition().id()).isEqualTo(bodyMeasurementEntity.getId());
         assertThat(response.bodyComposition().weight()).isEqualTo(bodyMeasurementEntity.getWeight());
-        assertThat(response.bodyComposition().fatPercentage()).isEqualTo(bodyMeasurementEntity.getFatPercentage());
+        assertThat(response.bodyComposition().fatPercentage()).isEqualTo(bodyMeasurementEntity.getFatMassWeight());
         assertThat(response.bodyComposition().skeletalMuscleWeight()).isEqualTo(bodyMeasurementEntity.getSkeletalMuscleWeight());
         assertThat(response.bodyComposition().measuredAt()).isEqualTo(bodyMeasurementEntity.getMeasuredAt());
     }
@@ -94,7 +94,7 @@ class UserMapperTest {
         BodyMeasurementEntity bodyMeasurementEntity = new BodyMeasurementEntity();
         bodyMeasurementEntity.setId(1L);
         bodyMeasurementEntity.setWeight(70.0);
-        bodyMeasurementEntity.setFatPercentage(25.0);
+        bodyMeasurementEntity.setFatMassWeight(25.0);
         bodyMeasurementEntity.setSkeletalMuscleWeight(50.0);
         bodyMeasurementEntity.setFatMassWeight(17.5);
         bodyMeasurementEntity.setMeasuredAt(LocalDateTime.of(2023, 12, 25, 0, 0));
@@ -102,7 +102,7 @@ class UserMapperTest {
         BodyMeasurementEntity bodyMeasurementEntity2 = new BodyMeasurementEntity();
         bodyMeasurementEntity2.setId(1L);
         bodyMeasurementEntity2.setWeight(70.0);
-        bodyMeasurementEntity2.setFatPercentage(25.0);
+        bodyMeasurementEntity2.setFatMassWeight(25.0);
         bodyMeasurementEntity2.setSkeletalMuscleWeight(50.0);
         bodyMeasurementEntity2.setFatMassWeight(17.5);
         bodyMeasurementEntity2.setMeasuredAt(LocalDateTime.of(2021, 12, 25, 0, 0));

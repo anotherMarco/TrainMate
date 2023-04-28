@@ -2,9 +2,12 @@ package de.oninek.trainmate.api.service;
 
 import de.oninek.trainmate.api.dto.CreateUserRequest;
 import de.oninek.trainmate.api.dto.UserResponse;
+import de.oninek.trainmate.api.exceptions.UserNotFoundException;
 import de.oninek.trainmate.api.persistance.user.UserEntity;
 import de.oninek.trainmate.api.persistance.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -25,5 +28,16 @@ public class UserServiceImpl implements UserService {
         UserEntity saved = userRepository.save(userEntity);
 
         return mapper.entityToResponse(saved);
+    }
+
+    @Override
+    public Page<UserResponse> findMany(Pageable pageable) {
+        return userRepository.findAll(pageable).map(mapper::entityToResponse);
+    }
+
+    @Override
+    public void delete(Long id) {
+        if (!userRepository.existsById(id)) throw new UserNotFoundException("User with id: " + id + "can't be found");
+        userRepository.deleteById(id);
     }
 }

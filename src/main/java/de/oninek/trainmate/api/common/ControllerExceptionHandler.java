@@ -41,7 +41,7 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler
-    @ApiResponse(responseCode = "404", description = "measurement   not found", content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = ProblemDetail.class))})
+    @ApiResponse(responseCode = "404", description = "measurement not found", content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = ProblemDetail.class))})
     public ResponseEntity<ProblemDetail> measurementNotFound(BodyMeasurementNotFoundException bmnfe) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(NOT_FOUND);
         problemDetail.setTitle("Measurement not found");

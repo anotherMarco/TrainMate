@@ -4,6 +4,8 @@ import de.oninek.trainmate.api.dto.CreateUserRequest;
 import de.oninek.trainmate.api.dto.UserResponse;
 import de.oninek.trainmate.api.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -26,5 +28,17 @@ public class UserControllerImpl implements UserController {
     @Override
     public ResponseEntity<UserResponse> findById(long id) {
         return ResponseEntity.ok(userService.findById(id));
+    }
+
+    @Override
+    public ResponseEntity<Page<UserResponse>> findMany(Pageable pageable) {
+        Page<UserResponse> page = userService.findMany(pageable);
+        return ResponseEntity.ok(page);
+    }
+
+    @Override
+    public ResponseEntity<Void> delete(Long id) {
+        userService.delete(id);
+        return ResponseEntity.notFound().build();
     }
 }

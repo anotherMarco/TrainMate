@@ -11,7 +11,7 @@ public class BodyMeasurementMapperImpl implements BodyMeasurementMapper {
     public BodyMeasurementResponse entityToResponse(BodyMeasurementEntity entity) {
       return new BodyMeasurementResponse(entity.getId(),
                 entity.getWeight(),
-                entity.getFatPercentage(),
+                entity.getFatMassWeight(),
                 entity.getSkeletalMuscleWeight(),
                 entity.getMeasuredAt());
     }
@@ -20,7 +20,7 @@ public class BodyMeasurementMapperImpl implements BodyMeasurementMapper {
     public BodyMeasurementEntity requestToEntity(CreateBodyMeasurementRequest request) {
         BodyMeasurementEntity entity = new BodyMeasurementEntity();
         entity.setWeight(request.weight());
-        entity.setFatPercentage(request.fatPercentage());
+        entity.setFatMassWeight(request.fatMassWeight());
         entity.setSkeletalMuscleWeight(request.skeletalMuscleWeight());
         entity.setMeasuredAt(request.measuredAt());
         return entity;
