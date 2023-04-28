@@ -2,7 +2,9 @@ package de.oninek.trainmate.api.persistance.user;
 
 import de.oninek.trainmate.api.persistance.BaseEntity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -10,6 +12,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "body_measurement")
 public class BodyMeasurementEntity extends BaseEntity {
 
@@ -19,9 +23,6 @@ public class BodyMeasurementEntity extends BaseEntity {
 
     @Column(name = "weight", nullable = false)
     private Double weight;
-
-    @Column(name = "fat_percentage")
-    private Double fatPercentage;
 
     @Column(name = "skeletal_muscle_weight")
     private Double skeletalMuscleWeight;

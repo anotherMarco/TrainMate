@@ -2,9 +2,7 @@ package de.oninek.trainmate.api.persistance.user;
 
 import de.oninek.trainmate.api.persistance.BaseEntity;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.util.LinkedHashSet;
@@ -14,6 +12,8 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(name = "uc_userentity_email", columnNames = {"email"})
 })

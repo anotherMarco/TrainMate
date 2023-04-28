@@ -35,4 +35,44 @@ public class BodyMeasurementBuilder {
     public CreateBodyMeasurementRequest buildCreateRequest() {
        return new CreateBodyMeasurementRequest(weight, fatWeight, skeletalMuscleWeight, measuredAt);
     }
+
+    public BodyMeasurementBuilder setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public BodyMeasurementBuilder setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    public BodyMeasurementBuilder setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
+    public BodyMeasurementBuilder setFatWeight(Double fatWeight) {
+        this.fatWeight = fatWeight;
+        return this;
+    }
+
+    public BodyMeasurementBuilder setMeasuredAt(LocalDateTime measuredAt) {
+        this.measuredAt = measuredAt;
+        return this;
+    }
+
+    public BodyMeasurementBuilder setWeight(Double weight) {
+        this.weight = weight;
+        return this;
+    }
+
+    public BodyMeasurementBuilder setSkeletalMuscleWeight(Double skeletalMuscleWeight) {
+        this.skeletalMuscleWeight = skeletalMuscleWeight;
+        return this;
+    }
+
+    public BodyMeasurementBuilder setUserBuilder(UserBuilder userBuilder) {
+        this.userBuilder = userBuilder;
+        return this;
+    }
 }

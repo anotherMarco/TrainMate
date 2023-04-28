@@ -2,7 +2,9 @@ package de.oninek.trainmate.api.service;
 import static org.assertj.core.api.Assertions.*;
 
 
+import de.oninek.trainmate.api.BodyMeasurementBuilder;
 import de.oninek.trainmate.api.dto.BodyMeasurementResponse;
+import de.oninek.trainmate.api.dto.CreateBodyMeasurementRequest;
 import de.oninek.trainmate.api.persistance.user.BodyMeasurementEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -15,10 +17,12 @@ import java.time.LocalDateTime;
 class BodyMeasurementMapperTest {
 
     private BodyMeasurementMapper mapper;
+    private BodyMeasurementBuilder bodyMeasurementBuilder;
 
     @BeforeEach
     void setUp() {
         mapper = new BodyMeasurementMapperImpl();
+        bodyMeasurementBuilder = new BodyMeasurementBuilder();
     }
 
     @Test
@@ -26,7 +30,7 @@ class BodyMeasurementMapperTest {
         BodyMeasurementEntity entity = new BodyMeasurementEntity();
         entity.setId(1L);
         entity.setWeight(70.0);
-        entity.setFatPercentage(25.0);
+        entity.setFatMassWeight(25.0);
         entity.setSkeletalMuscleWeight(50.0);
         entity.setFatMassWeight(17.5);
         entity.setMeasuredAt(LocalDateTime.now());
@@ -36,7 +40,7 @@ class BodyMeasurementMapperTest {
         assertThat(dto).isNotNull();
         assertThat(dto.id()).isEqualTo(entity.getId());
         assertThat(dto.weight()).isEqualTo(entity.getWeight());
-        assertThat(dto.fatPercentage()).isEqualTo(entity.getFatPercentage());
+        assertThat(dto.fatPercentage()).isEqualTo(entity.getFatMassWeight());
         assertThat(dto.skeletalMuscleWeight()).isEqualTo(entity.getSkeletalMuscleWeight());
         assertThat(dto.measuredAt()).isEqualTo(entity.getMeasuredAt());
     }
@@ -56,6 +60,19 @@ class BodyMeasurementMapperTest {
         assertThat(dto.fatPercentage()).isNull();
         assertThat(dto.skeletalMuscleWeight()).isNull();
         assertThat(dto.measuredAt()).isEqualTo(entity.getMeasuredAt());
+    }
+
+    @Test
+    void request_to_entity() {
+        BodyMeasurementEntity excepted = bodyMeasurementBuilder.buildEntity();
+        CreateBodyMeasurementRequest request = bodyMeasurementBuilder.buildCreateRequest();
+
+        BodyMeasurementEntity actual = mapper.requestToEntity(request);
+
+        assertThat(actual.getMeasuredAt()).isEqualTo(excepted.getMeasuredAt());
+        assertThat(actual.getFatMassWeight()).isEqualTo(excepted.getFatMassWeight());
+        assertThat(actual.getWeight()).isEqualTo(excepted.getWeight());
+        assertThat(actual.getSkeletalMuscleWeight()).isEqualTo(excepted.getSkeletalMuscleWeight());
     }
 
 
