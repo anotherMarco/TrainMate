@@ -1,12 +1,9 @@
-package de.oninek.trainmate.api.persistance.user;
+package de.oninek.trainmate.api.persistance.entity;
 
-import de.oninek.trainmate.api.persistance.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import java.util.LinkedHashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -50,5 +47,17 @@ public class UserEntity extends BaseEntity {
     @Override
     public int hashCode() {
         return email.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+               "id = " + getId() + ", " +
+               "createdAt = " + getCreatedAt() + ", " +
+               "updatedAt = " + getUpdatedAt() + ", " +
+               "firstName = " + getFirstName() + ", " +
+               "lastName = " + getLastName() + ", " +
+               "email = " + getEmail() + ", " +
+               "displayName = " + getDisplayName() + ")";
     }
 }
