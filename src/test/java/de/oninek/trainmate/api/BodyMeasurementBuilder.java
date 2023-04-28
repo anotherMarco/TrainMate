@@ -1,5 +1,6 @@
 package de.oninek.trainmate.api;
 
+import de.oninek.trainmate.api.dto.BodyMeasurementResponse;
 import de.oninek.trainmate.api.dto.CreateBodyMeasurementRequest;
 import de.oninek.trainmate.api.persistance.entity.BodyMeasurementEntity;
 
@@ -33,6 +34,10 @@ public class BodyMeasurementBuilder {
 
     public CreateBodyMeasurementRequest buildCreateRequest() {
        return new CreateBodyMeasurementRequest(weight, fatWeight, skeletalMuscleWeight, measuredAt);
+    }
+
+    public BodyMeasurementResponse buildResponse() {
+        return new BodyMeasurementResponse(id, weight, fatWeight, skeletalMuscleWeight, measuredAt);
     }
 
     public BodyMeasurementBuilder setId(Long id) {

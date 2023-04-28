@@ -1,9 +1,13 @@
 package de.oninek.trainmate.api;
 
+import de.oninek.trainmate.api.dto.BodyMeasurementResponse;
+import de.oninek.trainmate.api.dto.CreateUserRequest;
+import de.oninek.trainmate.api.dto.UserResponse;
 import de.oninek.trainmate.api.persistance.entity.UserEntity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class UserBuilder {
@@ -30,6 +34,18 @@ public class UserBuilder {
             userEntity.getBodyMeasurements().add(bodyMeasurementBuilder.buildEntity());
         }
         return userEntity;
+    }
+
+    public CreateUserRequest buildCreateRequesst() {
+        return new CreateUserRequest(firstName, lastName, email, displayName);
+    }
+
+    public UserResponse buildResponse() {
+        BodyMeasurementResponse bodyMeasurementResponse = bodyMeasurementBuilders.stream()
+                .map(BodyMeasurementBuilder::buildResponse)
+                .min(Comparator.comparing(BodyMeasurementResponse::measuredAt))
+                .orElse(null);
+        return new UserResponse(id, firstName, lastName, email, displayName, bodyMeasurementResponse);
     }
 
     public UserBuilder setId(Long id) {
