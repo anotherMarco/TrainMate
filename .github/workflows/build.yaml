@@ -1,9 +1,9 @@
 name: build
-run-name: ${{ github.actor }} push-dev
+run-name: ${{ github.actor }} push-master
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   build-with-maven:
     runs-on: ubuntu-latest
