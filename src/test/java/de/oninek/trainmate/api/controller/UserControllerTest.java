@@ -1,7 +1,7 @@
 package de.oninek.trainmate.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.oninek.trainmate.api.UserBuilder;
+import de.oninek.trainmate.api.testutil.UserBuilder;
 import de.oninek.trainmate.api.dto.CreateUserRequest;
 import de.oninek.trainmate.api.dto.UserResponse;
 import de.oninek.trainmate.api.exceptions.UserAlreadyExistsException;
@@ -18,10 +18,10 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -105,6 +105,18 @@ class UserControllerTest {
             mockMvc.perform(get("/users/1"))
                     .andExpect(status().isOk())
                     .andExpect(content().string(objectMapper.writeValueAsString(response)));
+        }
+    }
+
+    @Nested
+    class Delete {
+
+        @Test
+        void when_not_found_return_404() throws Exception {
+            doThrow(new UserNotFoundException("")).when(userService).delete(1L);
+
+            mockMvc.perform(delete("/users/1"))
+                    .andExpect(status().isNotFound());
         }
     }
 }

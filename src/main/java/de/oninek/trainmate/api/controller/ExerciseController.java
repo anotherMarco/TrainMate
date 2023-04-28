@@ -6,20 +6,23 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("exercise")
+import static org.springframework.http.HttpHeaders.LOCATION;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
+@Tag(name = "Exercises")
+@RequestMapping("exercises")
 public interface ExerciseController {
 
     @Operation(summary = "Create exercise")
-    @ApiResponse(responseCode = "201", description = "Exercise succesfully created",
-            headers = {@Header(name = HttpHeaders.LOCATION, description = "The uri where the created resource can be found")},
-            content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponse(responseCode = "201", description = "Exercise successfully created",
+            headers = {@Header(name = LOCATION, description = "The uri of the created resource")},
+            content = @Content(mediaType = APPLICATION_JSON_VALUE)
     )
     @PostMapping
     ResponseEntity<ExerciseResponse> create(@RequestBody CreateExerciseRequest request);

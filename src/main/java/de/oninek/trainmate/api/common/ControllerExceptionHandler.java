@@ -31,7 +31,7 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler
-    @ApiResponse()
+    @ApiResponse(responseCode = "409", content = @Content(mediaType = APPLICATION_JSON_VALUE))
     public ResponseEntity<ProblemDetail> userAlreadyExists(UserAlreadyExistsException e) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(CONFLICT);
         problemDetail.setTitle("Conflict");

@@ -1,4 +1,4 @@
-package de.oninek.trainmate.api;
+package de.oninek.trainmate.api.testutil;
 
 import de.oninek.trainmate.api.dto.BodyMeasurementResponse;
 import de.oninek.trainmate.api.dto.CreateUserRequest;
