@@ -1,6 +1,9 @@
 name: build
 run-name: ${{ github.actor }} push-dev
-on: [push]
+on:
+  push:
+    branches:
+      - main
 jobs:
   build-with-maven:
     runs-on: ubuntu-latest

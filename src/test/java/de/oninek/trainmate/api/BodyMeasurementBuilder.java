@@ -14,7 +14,6 @@ public class BodyMeasurementBuilder {
     private LocalDateTime measuredAt = LocalDateTime.of(2023, 12, 25, 12, 0);
     private Double weight = 90.0;
     private Double skeletalMuscleWeight = 20.0;
-
     private UserBuilder userBuilder = null;
 
 
