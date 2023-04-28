@@ -54,12 +54,12 @@ class UserMapperTest {
         assertThat(response.lastName()).isEqualTo(entity.getLastName());
         assertThat(response.email()).isEqualTo(entity.getEmail());
         assertThat(response.displayName()).isEqualTo(entity.getDisplayName());
-        assertThat(response.bodyComposition()).isNotNull();
-        assertThat(response.bodyComposition().id()).isEqualTo(bodyMeasurementEntity.getId());
-        assertThat(response.bodyComposition().weight()).isEqualTo(bodyMeasurementEntity.getWeight());
-        assertThat(response.bodyComposition().fatPercentage()).isEqualTo(bodyMeasurementEntity.getFatMassWeight());
-        assertThat(response.bodyComposition().skeletalMuscleWeight()).isEqualTo(bodyMeasurementEntity.getSkeletalMuscleWeight());
-        assertThat(response.bodyComposition().measuredAt()).isEqualTo(bodyMeasurementEntity.getMeasuredAt());
+        assertThat(response.bodyMeasurement()).isNotNull();
+        assertThat(response.bodyMeasurement().id()).isEqualTo(bodyMeasurementEntity.getId());
+        assertThat(response.bodyMeasurement().weight()).isEqualTo(bodyMeasurementEntity.getWeight());
+        assertThat(response.bodyMeasurement().fatWeight()).isEqualTo(bodyMeasurementEntity.getFatMassWeight());
+        assertThat(response.bodyMeasurement().skeletalMuscleWeight()).isEqualTo(bodyMeasurementEntity.getSkeletalMuscleWeight());
+        assertThat(response.bodyMeasurement().measuredAt()).isEqualTo(bodyMeasurementEntity.getMeasuredAt());
     }
 
     @Test
@@ -79,7 +79,7 @@ class UserMapperTest {
         assertThat(response.lastName()).isEqualTo(entity.getLastName());
         assertThat(response.email()).isEqualTo(entity.getEmail());
         assertThat(response.displayName()).isEqualTo(entity.getDisplayName());
-        assertThat(response.bodyComposition()).isNull();
+        assertThat(response.bodyMeasurement()).isNull();
     }
 
     @Test
@@ -111,7 +111,7 @@ class UserMapperTest {
 
         UserResponse response = mapper.entityToResponse(entity);
 
-        assertThat(response.bodyComposition().measuredAt()).isEqualTo(LocalDateTime.of(2023, 12, 25, 0, 0));
+        assertThat(response.bodyMeasurement().measuredAt()).isEqualTo(LocalDateTime.of(2023, 12, 25, 0, 0));
     }
 
     @Test

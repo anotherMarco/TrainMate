@@ -10,6 +10,6 @@ public record UserResponse(
        @Schema(example = "Doe") String lastName,
        @Schema(example = "jd@example.com") String email,
        @Schema(example = "johnDoe") String displayName,
-        BodyMeasurementResponse bodyComposition
+        BodyMeasurementResponse bodyMeasurement
 ) implements Serializable {
 }
