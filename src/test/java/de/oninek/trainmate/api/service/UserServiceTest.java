@@ -1,6 +1,6 @@
 package de.oninek.trainmate.api.service;
 
-import de.oninek.trainmate.api.persistance.user.UserRepository;
+import de.oninek.trainmate.api.persistance.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;

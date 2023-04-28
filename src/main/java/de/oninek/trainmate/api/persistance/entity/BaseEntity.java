@@ -1,4 +1,4 @@
-package de.oninek.trainmate.api.persistance;
+package de.oninek.trainmate.api.persistance.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

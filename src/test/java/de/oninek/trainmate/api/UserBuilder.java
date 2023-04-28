@@ -1,6 +1,6 @@
 package de.oninek.trainmate.api;
 
-import de.oninek.trainmate.api.persistance.user.UserEntity;
+import de.oninek.trainmate.api.persistance.entity.UserEntity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

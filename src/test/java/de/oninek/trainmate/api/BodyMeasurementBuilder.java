@@ -1,7 +1,7 @@
 package de.oninek.trainmate.api;
 
 import de.oninek.trainmate.api.dto.CreateBodyMeasurementRequest;
-import de.oninek.trainmate.api.persistance.user.BodyMeasurementEntity;
+import de.oninek.trainmate.api.persistance.entity.BodyMeasurementEntity;
 
 import java.time.LocalDateTime;
 

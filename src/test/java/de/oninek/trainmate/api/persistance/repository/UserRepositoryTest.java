@@ -1,7 +1,9 @@
-package de.oninek.trainmate.api.persistance.user;
+package de.oninek.trainmate.api.persistance.repository;
 
 import de.oninek.trainmate.api.TestPostgresContainer;
 import de.oninek.trainmate.api.exceptions.UserNotFoundException;
+import de.oninek.trainmate.api.persistance.entity.BodyMeasurementEntity;
+import de.oninek.trainmate.api.persistance.entity.UserEntity;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,5 @@
-package de.oninek.trainmate.api.persistance.user;
+package de.oninek.trainmate.api.persistance.entity;
 
-import de.oninek.trainmate.api.persistance.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,5 +39,11 @@ public class BodyMeasurementEntity extends BaseEntity {
     }
 
 
-
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+               "id = " + getId() + ", " +
+               "createdAt = " + getCreatedAt() + ", " +
+               "updatedAt = " + getUpdatedAt() + ")";
+    }
 }

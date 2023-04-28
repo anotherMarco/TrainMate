@@ -1,7 +1,7 @@
-package de.oninek.trainmate.api.persistance.user;
+package de.oninek.trainmate.api.persistance.repository;
 
 import de.oninek.trainmate.api.exceptions.UserNotFoundException;
-import de.oninek.trainmate.api.persistance.TrainMateRepository;
+import de.oninek.trainmate.api.persistance.entity.UserEntity;
 
 
 public interface UserRepository extends TrainMateRepository<UserEntity> {

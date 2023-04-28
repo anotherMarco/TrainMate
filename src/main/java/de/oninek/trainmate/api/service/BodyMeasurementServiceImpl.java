@@ -2,10 +2,10 @@ package de.oninek.trainmate.api.service;
 
 import de.oninek.trainmate.api.dto.BodyMeasurementResponse;
 import de.oninek.trainmate.api.dto.CreateBodyMeasurementRequest;
-import de.oninek.trainmate.api.persistance.user.BodyMeasurementEntity;
-import de.oninek.trainmate.api.persistance.user.BodyMeasurementRepository;
-import de.oninek.trainmate.api.persistance.user.UserEntity;
-import de.oninek.trainmate.api.persistance.user.UserRepository;
+import de.oninek.trainmate.api.persistance.entity.BodyMeasurementEntity;
+import de.oninek.trainmate.api.persistance.repository.BodyMeasurementRepository;
+import de.oninek.trainmate.api.persistance.entity.UserEntity;
+import de.oninek.trainmate.api.persistance.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
