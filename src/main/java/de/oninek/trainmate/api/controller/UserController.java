@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -26,13 +25,11 @@ public interface UserController {
             headers = {@Header(name = HttpHeaders.LOCATION, description = "The uri where the created resource can be found")},
             content = @Content(mediaType = APPLICATION_JSON_VALUE)
     )
-    @ApiResponse(responseCode = "409", description = "Conflict", content = @Content(mediaType = APPLICATION_JSON_VALUE))
     @PostMapping
     ResponseEntity<UserResponse> save(@Valid @RequestBody CreateUserRequest request);
 
     @Operation(summary = "find a user by id")
     @ApiResponse(responseCode = "200", content = @Content(mediaType = APPLICATION_JSON_VALUE))
-    @ApiResponse(responseCode = "404", description = "User not found", content = @Content(mediaType = APPLICATION_JSON_VALUE))
     @GetMapping("{id}")
     ResponseEntity<UserResponse> findById(@PathVariable long id);
 
@@ -41,14 +38,8 @@ public interface UserController {
     @GetMapping
     ResponseEntity<Page<UserResponse>> findMany(Pageable pageable);
 
-    @Operation(
-            summary = "Delete an user by ID",
-            operationId = "deleteUserById"
-    )
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "User deleted successfully"),
-            @ApiResponse(responseCode = "404", description = "User not found")
-    })
+    @Operation(summary = "Delete an user by ID", operationId = "deleteUserById")
+    @ApiResponse(responseCode = "204", description = "User deleted successfully")
     @DeleteMapping("{id}")
     ResponseEntity<Void> delete(@PathVariable Long id);
 }

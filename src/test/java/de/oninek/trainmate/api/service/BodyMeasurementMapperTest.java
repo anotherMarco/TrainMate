@@ -2,7 +2,7 @@ package de.oninek.trainmate.api.service;
 import static org.assertj.core.api.Assertions.*;
 
 
-import de.oninek.trainmate.api.BodyMeasurementBuilder;
+import de.oninek.trainmate.api.testutil.BodyMeasurementBuilder;
 import de.oninek.trainmate.api.dto.BodyMeasurementResponse;
 import de.oninek.trainmate.api.dto.CreateBodyMeasurementRequest;
 import de.oninek.trainmate.api.persistance.entity.BodyMeasurementEntity;
