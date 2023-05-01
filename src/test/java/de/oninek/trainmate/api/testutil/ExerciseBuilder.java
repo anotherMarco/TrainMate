@@ -2,6 +2,7 @@ package de.oninek.trainmate.api.testutil;
 
 import de.oninek.trainmate.api.dto.CreateExerciseRequest;
 import de.oninek.trainmate.api.dto.ExerciseResponse;
+import de.oninek.trainmate.api.persistance.entity.ClaimedMuscleEntity;
 import de.oninek.trainmate.api.persistance.entity.EquipmentEntity;
 import de.oninek.trainmate.api.persistance.entity.ExerciseEntity;
 import de.oninek.trainmate.api.persistance.entity.MuscleIntensity;
@@ -15,15 +16,15 @@ public class ExerciseBuilder {
     private LocalDateTime createdAt = LocalDateTime.of(2023, 12, 25, 12, 0);
     private LocalDateTime updatedAt = LocalDateTime.of(2023, 12, 25, 12, 0);
     private String name = "Bench Press";
-    private HashMap<MuscleIntensity, MuscleBuilder> claimedMuscles = new HashMap<>();
+    private List<ClaimedMuscleBuilder> claimedMuscles = new ArrayList<>();
     private List<EquipmentBuilder> equipments = new ArrayList<>();
 
     public ExerciseEntity buildEntity() {
         ExerciseEntity exerciseEntity = new ExerciseEntity();
         exerciseEntity.setName(name);
-        claimedMuscles.forEach((muscleIntensity, muscleBuilder) -> {
-            exerciseEntity.getClaimedMuscles().put(muscleIntensity, muscleBuilder.buildEntity());
-        });
+        for (ClaimedMuscleBuilder claimedMuscle : claimedMuscles) {
+            exerciseEntity.getClaimedMuscles().add(claimedMuscle.buildEntity());
+        }
         for (EquipmentBuilder equipment : equipments) {
             exerciseEntity.getEquipments().add(equipment.buildEntity());
         }
@@ -35,15 +36,17 @@ public class ExerciseBuilder {
     }
 
     public ExerciseResponse buildResponse() {
-        HashMap<MuscleIntensity, String> hashMap = new HashMap<>();
-        claimedMuscles.forEach((muscleIntensity, muscleBuilder) -> {
-            hashMap.put(muscleIntensity, muscleBuilder.buildEntity().getName());
-        });
+        Map<MuscleIntensity, Set<String>> claimedMuscles = this.claimedMuscles.stream().map(ClaimedMuscleBuilder::buildEntity)
+                .collect(Collectors.groupingBy(
+                        ClaimedMuscleEntity::getIntensity,
+                        Collectors.mapping(claimedMuscleEntity -> claimedMuscleEntity.getMuscle().getName(),
+                                Collectors.toSet())));
+
         Set<String> equipments = this.equipments.stream()
                 .map(EquipmentBuilder::buildEntity)
                 .map(EquipmentEntity::getName)
                 .collect(Collectors.toSet());
-        return new ExerciseResponse(id, name, hashMap, equipments);
+        return new ExerciseResponse(id, name, claimedMuscles, equipments);
     }
 
     public ExerciseBuilder setId(Long id) {
@@ -66,8 +69,8 @@ public class ExerciseBuilder {
         return this;
     }
 
-    public ExerciseBuilder addClaimedMuscle(MuscleIntensity intensity, MuscleBuilder builder) {
-        this.claimedMuscles.put(intensity, builder);
+    public ExerciseBuilder addClaimedMuscle(ClaimedMuscleBuilder claimedMuscleBuilder) {
+        this.claimedMuscles.add(claimedMuscleBuilder);
         return this;
     }
 

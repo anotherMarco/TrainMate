@@ -1,5 +1,6 @@
 package de.oninek.trainmate.api.controller;
 
+import de.oninek.trainmate.api.dto.AddClaimedMusclesRequest;
 import de.oninek.trainmate.api.dto.CreateExerciseRequest;
 import de.oninek.trainmate.api.dto.ExerciseResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,4 +28,8 @@ public interface ExerciseController {
     )
     @PostMapping
     ResponseEntity<ExerciseResponse> create(@RequestBody CreateExerciseRequest request);
+
+    @Operation(summary = "Add claimed muscles")
+    @PostMapping("claimed-muscles/{id}")
+    ResponseEntity<ExerciseResponse> addClaimedMuscles(@PathVariable Long id, @RequestBody AddClaimedMusclesRequest request);
 }

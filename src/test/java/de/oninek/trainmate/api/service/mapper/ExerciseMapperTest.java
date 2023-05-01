@@ -3,14 +3,15 @@ package de.oninek.trainmate.api.service.mapper;
 import de.oninek.trainmate.api.dto.CreateExerciseRequest;
 import de.oninek.trainmate.api.dto.ExerciseResponse;
 import de.oninek.trainmate.api.persistance.entity.ExerciseEntity;
-import de.oninek.trainmate.api.persistance.entity.MuscleIntensity;
+import de.oninek.trainmate.api.testutil.ClaimedMuscleBuilder;
 import de.oninek.trainmate.api.testutil.EquipmentBuilder;
 import de.oninek.trainmate.api.testutil.ExerciseBuilder;
-import de.oninek.trainmate.api.testutil.MuscleBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
+
+import java.util.Set;
 
 import static de.oninek.trainmate.api.persistance.entity.MuscleIntensity.MAIN;
 import static de.oninek.trainmate.api.persistance.entity.MuscleIntensity.SUPPORT;
@@ -41,8 +42,8 @@ class ExerciseMapperTest {
     @Test
     void entity_to_response() {
         exerciseBuilder.addEquipment(new EquipmentBuilder().setName("Weights"));
-        exerciseBuilder.addClaimedMuscle(MAIN, new MuscleBuilder().setName("Chest"));
-        exerciseBuilder.addClaimedMuscle(SUPPORT, new MuscleBuilder().setName("Legs"));
+        exerciseBuilder.addClaimedMuscle(new ClaimedMuscleBuilder().setMuscleIntensity(MAIN).setMuscleName("Chest"));
+        exerciseBuilder.addClaimedMuscle(new ClaimedMuscleBuilder().setMuscleIntensity(SUPPORT).setMuscleName("Legs"));
         ExerciseEntity exerciseEntity = exerciseBuilder.buildEntity();
 
         ExerciseResponse actual = exerciseMapper.entityToResponse(exerciseEntity);
@@ -51,6 +52,6 @@ class ExerciseMapperTest {
         assertThat(actual.equipments()).hasSize(exerciseEntity.getEquipments().size());
         assertThat(actual.equipments()).contains("Weights");
         assertThat(actual.claimedMuscles()).hasSize(exerciseEntity.getClaimedMuscles().size());
-        assertThat(actual.claimedMuscles()).contains(entry(MAIN, "Chest"), entry(SUPPORT, "Legs"));
+        assertThat(actual.claimedMuscles()).contains(entry(MAIN, Set.of("Chest")), entry(SUPPORT, Set.of("Legs")));
     }
 }
