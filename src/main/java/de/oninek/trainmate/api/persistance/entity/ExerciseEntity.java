@@ -19,7 +19,7 @@ public class ExerciseEntity extends BaseEntity {
 
     @OneToMany
     @MapKeyEnumerated(EnumType.STRING)
-    private HashMap<MuscleIntensity, MuscleEntity> claimedMuscles;
+    private HashMap<MuscleIntensity, MuscleEntity> claimedMuscles = new HashMap<>();
 
     @ManyToMany
     @JoinTable(name = "exercises_equipments",

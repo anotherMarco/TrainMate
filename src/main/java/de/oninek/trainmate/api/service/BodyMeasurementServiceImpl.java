@@ -6,6 +6,7 @@ import de.oninek.trainmate.api.persistance.entity.BodyMeasurementEntity;
 import de.oninek.trainmate.api.persistance.repository.BodyMeasurementRepository;
 import de.oninek.trainmate.api.persistance.entity.UserEntity;
 import de.oninek.trainmate.api.persistance.repository.UserRepository;
+import de.oninek.trainmate.api.service.mapper.BodyMeasurementMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

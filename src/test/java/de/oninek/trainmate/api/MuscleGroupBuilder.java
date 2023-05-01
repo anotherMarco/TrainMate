@@ -1,4 +1,4 @@
-package de.oninek.trainmate.api.service;
+package de.oninek.trainmate.api;
 
 import de.oninek.trainmate.api.testutil.MuscleBuilder;
 import de.oninek.trainmate.api.persistance.entity.MuscleGroupEntity;

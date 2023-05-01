@@ -1,9 +1,11 @@
-package de.oninek.trainmate.api.service;
+package de.oninek.trainmate.api.service.mapper;
 
 import de.oninek.trainmate.api.dto.CreateUserRequest;
 import de.oninek.trainmate.api.dto.UserResponse;
 import de.oninek.trainmate.api.persistance.entity.BodyMeasurementEntity;
 import de.oninek.trainmate.api.persistance.entity.UserEntity;
+import de.oninek.trainmate.api.service.mapper.BodyMeasurementMapperImpl;
+import de.oninek.trainmate.api.service.mapper.UserMapperImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;

@@ -2,7 +2,6 @@ package de.oninek.trainmate.api.testutil;
 
 import de.oninek.trainmate.api.dto.CreateExerciseRequest;
 import de.oninek.trainmate.api.dto.ExerciseResponse;
-import de.oninek.trainmate.api.persistance.entity.BaseEntity;
 import de.oninek.trainmate.api.persistance.entity.EquipmentEntity;
 import de.oninek.trainmate.api.persistance.entity.ExerciseEntity;
 import de.oninek.trainmate.api.persistance.entity.MuscleIntensity;
@@ -32,16 +31,7 @@ public class ExerciseBuilder {
     }
 
     public CreateExerciseRequest buildCreateRequest() {
-        HashMap<MuscleIntensity, Long> intensityLongHashMap = new HashMap<>();
-        claimedMuscles.forEach((muscleIntensity, muscleBuilder) -> {
-            intensityLongHashMap.put(muscleIntensity, muscleBuilder.buildEntity().getId());
-        });
-
-        Set<Long> equipmentIds = equipments.stream()
-                .map(EquipmentBuilder::buildEntity)
-                .map(BaseEntity::getId)
-                .collect(Collectors.toSet());
-        return new CreateExerciseRequest(name, intensityLongHashMap, equipmentIds);
+        return new CreateExerciseRequest(name);
     }
 
     public ExerciseResponse buildResponse() {
@@ -76,7 +66,7 @@ public class ExerciseBuilder {
         return this;
     }
 
-    public ExerciseBuilder setClaimedMuscles(MuscleIntensity intensity, MuscleBuilder builder) {
+    public ExerciseBuilder addClaimedMuscle(MuscleIntensity intensity, MuscleBuilder builder) {
         this.claimedMuscles.put(intensity, builder);
         return this;
     }
