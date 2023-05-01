@@ -12,19 +12,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @WebMvcTest(UserController.class)
@@ -106,6 +106,15 @@ class UserControllerTest {
                     .andExpect(status().isOk())
                     .andExpect(content().string(objectMapper.writeValueAsString(response)));
         }
+
+        @Test
+        void empty_page_when_result_is_empty() throws Exception {
+            when(userService.findMany(any())).thenReturn(Page.empty());
+
+            mockMvc.perform(get("/users"))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.size").value(0));
+        }
     }
 
     @Nested
@@ -117,6 +126,14 @@ class UserControllerTest {
 
             mockMvc.perform(delete("/users/1"))
                     .andExpect(status().isNotFound());
+        }
+
+        @Test
+        void when_successful_return_204() throws Exception {
+            doNothing().when(userService).delete(1L);
+
+            mockMvc.perform(delete("/users/1"))
+                    .andExpect(status().isNoContent());
         }
     }
 }
