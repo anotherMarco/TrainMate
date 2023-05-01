@@ -2,6 +2,7 @@ package de.oninek.trainmate.api.common;
 
 import de.oninek.trainmate.api.controller.ControllerPackage;
 import de.oninek.trainmate.api.exceptions.BodyMeasurementNotFoundException;
+import de.oninek.trainmate.api.exceptions.ResourceNotFoundException;
 import de.oninek.trainmate.api.exceptions.UserAlreadyExistsException;
 import de.oninek.trainmate.api.exceptions.UserNotFoundException;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -20,12 +21,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class ControllerExceptionHandler {
 
     @ExceptionHandler
-    @ApiResponse(responseCode = "404", description = "user not found",
+    @ApiResponse(responseCode = "404", description = "Resource not found",
             content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = ProblemDetail.class))})
-    public ResponseEntity<ProblemDetail> userNotFound(UserNotFoundException unfe) {
+    public ResponseEntity<ProblemDetail> userNotFound(ResourceNotFoundException e) {
         ProblemDetail problemDetail = ProblemDetail.forStatus(NOT_FOUND);
-        problemDetail.setTitle("User not found");
-        problemDetail.setDetail(unfe.getMessage());
+        problemDetail.setTitle("Resource not found");
+        problemDetail.setDetail(e.getMessage());
 
         return ResponseEntity.of(problemDetail).build();
     }
@@ -39,15 +40,4 @@ public class ControllerExceptionHandler {
 
         return ResponseEntity.of(problemDetail).build();
     }
-
-    @ExceptionHandler
-    @ApiResponse(responseCode = "404", description = "measurement not found", content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = ProblemDetail.class))})
-    public ResponseEntity<ProblemDetail> measurementNotFound(BodyMeasurementNotFoundException bmnfe) {
-        ProblemDetail problemDetail = ProblemDetail.forStatus(NOT_FOUND);
-        problemDetail.setTitle("Measurement not found");
-        problemDetail.setDetail(bmnfe.getMessage());
-
-        return ResponseEntity.of(problemDetail).build();
-    }
-
 }

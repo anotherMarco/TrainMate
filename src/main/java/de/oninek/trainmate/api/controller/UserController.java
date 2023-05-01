@@ -31,7 +31,7 @@ public interface UserController {
     @Operation(summary = "find a user by id")
     @ApiResponse(responseCode = "200", content = @Content(mediaType = APPLICATION_JSON_VALUE))
     @GetMapping("{id}")
-    ResponseEntity<UserResponse> findById(@PathVariable long id);
+    ResponseEntity<UserResponse> findById(@PathVariable Long id);
 
     @Operation(summary = "Get a List of users", description = "Returns a paginated list of users, sorted by the specified attribut")
     @ApiResponse(responseCode = "200", content = @Content(mediaType = APPLICATION_JSON_VALUE))
