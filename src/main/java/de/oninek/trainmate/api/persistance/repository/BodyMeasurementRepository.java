@@ -6,6 +6,6 @@ import de.oninek.trainmate.api.persistance.entity.BodyMeasurementEntity;
 public interface BodyMeasurementRepository extends TrainMateRepository<BodyMeasurementEntity> {
 
     default BodyMeasurementEntity findByIdOrThrow(long id) {
-        return findById(id).orElseThrow(() -> new BodyMeasurementNotFoundException("BodyMeasurement with id " + id + " can't be found"));
+        return findById(id).orElseThrow(() -> new BodyMeasurementNotFoundException(id));
     }
 }

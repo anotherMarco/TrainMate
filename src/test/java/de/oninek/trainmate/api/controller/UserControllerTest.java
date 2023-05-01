@@ -113,7 +113,7 @@ class UserControllerTest {
 
         @Test
         void when_not_found_return_404() throws Exception {
-            doThrow(new UserNotFoundException("")).when(userService).delete(1L);
+            doThrow(new UserNotFoundException(1L)).when(userService).delete(1L);
 
             mockMvc.perform(delete("/users/1"))
                     .andExpect(status().isNotFound());

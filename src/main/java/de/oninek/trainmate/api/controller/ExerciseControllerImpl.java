@@ -1,5 +1,6 @@
 package de.oninek.trainmate.api.controller;
 
+import de.oninek.trainmate.api.dto.AddClaimedMusclesRequest;
 import de.oninek.trainmate.api.dto.CreateExerciseRequest;
 import de.oninek.trainmate.api.dto.ExerciseResponse;
 import de.oninek.trainmate.api.service.ExerciseService;
@@ -20,5 +21,11 @@ public class ExerciseControllerImpl implements ExerciseController {
         ExerciseResponse response = exerciseService.create(request);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(response.id()).toUri();
         return ResponseEntity.created(uri).body(response);
+    }
+
+    @Override
+    public ResponseEntity<ExerciseResponse> addClaimedMuscles(Long id, AddClaimedMusclesRequest request) {
+        ExerciseResponse exerciseResponse = exerciseService.addClaimedMuscles(id, request);
+        return ResponseEntity.ok(exerciseResponse);
     }
 }

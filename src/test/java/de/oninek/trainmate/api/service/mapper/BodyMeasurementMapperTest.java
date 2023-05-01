@@ -1,17 +1,17 @@
-package de.oninek.trainmate.api.service;
-import static org.assertj.core.api.Assertions.*;
+package de.oninek.trainmate.api.service.mapper;
 
-
-import de.oninek.trainmate.api.testutil.BodyMeasurementBuilder;
 import de.oninek.trainmate.api.dto.BodyMeasurementResponse;
 import de.oninek.trainmate.api.dto.CreateBodyMeasurementRequest;
 import de.oninek.trainmate.api.persistance.entity.BodyMeasurementEntity;
+import de.oninek.trainmate.api.testutil.BodyMeasurementBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class BodyMeasurementMapperTest {

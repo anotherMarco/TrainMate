@@ -7,6 +7,6 @@ import de.oninek.trainmate.api.persistance.entity.UserEntity;
 public interface UserRepository extends TrainMateRepository<UserEntity> {
 
     default UserEntity findByIdOrThrow(Long id) {
-        return findById(id).orElseThrow(() -> new UserNotFoundException("User with id " + id + "can't be found"));
+        return findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 }
