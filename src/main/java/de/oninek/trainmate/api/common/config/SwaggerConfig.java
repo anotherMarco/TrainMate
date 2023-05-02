@@ -15,4 +15,5 @@ public class SwaggerConfig {
                 .components(new Components())
                 .info(new Info().title("TrainMate API"));
     }
+
 }
