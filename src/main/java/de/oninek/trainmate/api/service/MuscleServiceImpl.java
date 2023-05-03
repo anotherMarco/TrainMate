@@ -17,12 +17,7 @@ public class MuscleServiceImpl implements MuscleService {
 
     @Override
     public Page<MuscleResponse> findMany(Long muscleGroupId, Pageable pageable) {
-        if (muscleGroupId == null) {
-            return muscleRepository.findAll(pageable).map(muscleMapper::entityToResponse);
-        } else {
-            return muscleRepository.findAllByMuscleGroupId(muscleGroupId, pageable)
-                    .map(muscleMapper::entityToResponse);
-        }
-
+        return muscleRepository.findAllByMuscleGroupIdOrFindAll(pageable, muscleGroupId).
+                map(muscleMapper::entityToResponse);
     }
 }
