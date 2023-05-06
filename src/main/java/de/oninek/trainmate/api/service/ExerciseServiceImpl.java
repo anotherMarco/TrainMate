@@ -10,7 +10,14 @@ import de.oninek.trainmate.api.persistance.repository.ExerciseRepository;
 import de.oninek.trainmate.api.persistance.repository.MuscleRepository;
 import de.oninek.trainmate.api.service.mapper.ExerciseMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+import static de.oninek.trainmate.api.persistance.repository.ExerciseRepository.*;
 
 @RequiredArgsConstructor
 @Service
@@ -37,5 +44,17 @@ public class ExerciseServiceImpl implements ExerciseService {
         exercise.addClaimedMuscle(claimedMuscleEntity);
         ExerciseEntity saved = exerciseRepository.save(exercise);
         return exerciseMapper.entityToResponse(saved);
+    }
+
+    @Override
+    public Page<ExerciseResponse> findMany(List<Long> claimedMuscleGroupIds,
+                                           List<Long> mainMuscleIds,
+                                           List<Long> supportMuscleIds,
+                                           Pageable pageable) {
+        Specification<ExerciseEntity> specification = isInMainMuscles(mainMuscleIds)
+                .and(isInSupportedMuscles(supportMuscleIds))
+                .and(isInMuscleGroup(claimedMuscleGroupIds));
+        return exerciseRepository.findAll(specification, pageable)
+                .map(exerciseMapper::entityToResponse);
     }
 }
