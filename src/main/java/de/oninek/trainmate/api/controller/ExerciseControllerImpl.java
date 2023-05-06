@@ -38,7 +38,8 @@ public class ExerciseControllerImpl implements ExerciseController {
                                                            List<Long> mainMuscleIds,
                                                            List<Long> supportMuscleIds,
                                                            Pageable pageable) {
-        return null;
+        Page<ExerciseResponse> response = exerciseService.findMany(claimedMuscleGroupIds, mainMuscleIds, supportMuscleIds, pageable);
+        return ResponseEntity.ok(response);
     }
 
 
