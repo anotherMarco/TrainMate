@@ -1,5 +1,6 @@
 package de.oninek.trainmate.api.testutil;
 
+import de.oninek.trainmate.api.dto.AddClaimedMusclesRequest;
 import de.oninek.trainmate.api.persistance.entity.ClaimedMuscleEntity;
 import de.oninek.trainmate.api.persistance.entity.MuscleIntensity;
 
@@ -53,6 +54,10 @@ public class ClaimedMuscleBuilder {
         claimedMuscleEntity.setIntensity(muscleIntensity);
         claimedMuscleEntity.setMuscle(muscleBuilder.buildEntity());
         return claimedMuscleEntity;
+    }
+
+    public AddClaimedMusclesRequest buildAddRequest() {
+        return new AddClaimedMusclesRequest(muscleIntensity, muscleBuilder.buildEntity().getId());
     }
 
 }

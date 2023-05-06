@@ -5,11 +5,14 @@ import de.oninek.trainmate.api.dto.CreateExerciseRequest;
 import de.oninek.trainmate.api.dto.ExerciseResponse;
 import de.oninek.trainmate.api.service.ExerciseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,7 +28,18 @@ public class ExerciseControllerImpl implements ExerciseController {
 
     @Override
     public ResponseEntity<ExerciseResponse> addClaimedMuscles(Long id, AddClaimedMusclesRequest request) {
-        ExerciseResponse exerciseResponse = exerciseService.addClaimedMuscles(id, request);
-        return ResponseEntity.ok(exerciseResponse);
+        ExerciseResponse exerciseResponse = exerciseService.addClaimedMuscle(id, request);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}/claimed-muscles").buildAndExpand(id).toUri();
+        return ResponseEntity.created(uri).body(exerciseResponse);
     }
+
+    @Override
+    public ResponseEntity<Page<ExerciseResponse>> findMany(List<Long> claimedMuscleGroupIds,
+                                                           List<Long> mainMuscleIds,
+                                                           List<Long> supportMuscleIds,
+                                                           Pageable pageable) {
+        return null;
+    }
+
+
 }

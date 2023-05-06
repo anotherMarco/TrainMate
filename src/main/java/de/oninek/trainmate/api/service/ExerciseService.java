@@ -8,5 +8,5 @@ public interface ExerciseService {
 
     ExerciseResponse create(CreateExerciseRequest request);
 
-    ExerciseResponse addClaimedMuscles(Long id, AddClaimedMusclesRequest request);
+    ExerciseResponse addClaimedMuscle(Long id, AddClaimedMusclesRequest request);
 }

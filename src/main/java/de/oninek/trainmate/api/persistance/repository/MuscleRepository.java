@@ -1,5 +1,6 @@
 package de.oninek.trainmate.api.persistance.repository;
 
+import de.oninek.trainmate.api.exceptions.MuscleNotFoundException;
 import de.oninek.trainmate.api.persistance.entity.MuscleEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,10 @@ public interface MuscleRepository extends TrainMateRepository<MuscleEntity> {
         return Optional.ofNullable(muscleGroupId)
                 .map(id -> findAllByMuscleGroupId(pageable, id))
                 .orElseGet(() -> findAll(pageable));
+    }
+
+    default MuscleEntity findByIdOrThrow(Long id) {
+        return findById(id).orElseThrow(() -> new MuscleNotFoundException(id));
     }
 
 }
