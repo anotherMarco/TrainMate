@@ -1,9 +1,11 @@
 package de.oninek.trainmate.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.oninek.trainmate.api.dto.AddClaimedMusclesRequest;
 import de.oninek.trainmate.api.dto.CreateExerciseRequest;
 import de.oninek.trainmate.api.dto.ExerciseResponse;
 import de.oninek.trainmate.api.service.ExerciseService;
+import de.oninek.trainmate.api.testutil.ClaimedMuscleBuilder;
 import de.oninek.trainmate.api.testutil.ExerciseBuilder;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +30,20 @@ class ExerciseControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
     private ExerciseBuilder exerciseBuilder;
+    private ClaimedMuscleBuilder claimedMuscleBuilder;
+
 
     @BeforeEach
     void setUp() {
         exerciseBuilder = new ExerciseBuilder();
+        claimedMuscleBuilder = new ClaimedMuscleBuilder();
     }
 
     @Nested
     class Post {
 
         @Test
-        void test() throws Exception {
+        void successful_post_returns_201() throws Exception {
             CreateExerciseRequest createExerciseRequest = exerciseBuilder.buildCreateRequest();
             String json = objectMapper.writeValueAsString(createExerciseRequest);
             ExerciseResponse exerciseResponse = exerciseBuilder.buildResponse();
@@ -55,6 +60,17 @@ class ExerciseControllerTest {
                     .andExpect(jsonPath("$.claimedMuscles").isMap())
                     .andExpect(jsonPath("$.equipments").isArray());
         }
+    }
+
+    @Test
+    public void successful_add_muscle_returns_201() throws Exception {
+        AddClaimedMusclesRequest request = claimedMuscleBuilder.buildAddRequest();
+        String jsonRequest = objectMapper.writeValueAsString(request);
+
+        mockMvc.perform(post("/exercises/1/claimed-muscles")
+                        .contentType(APPLICATION_JSON)
+                        .content(jsonRequest))
+                .andExpect(status().isCreated());
     }
 
 }

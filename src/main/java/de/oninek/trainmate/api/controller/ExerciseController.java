@@ -4,15 +4,18 @@ import de.oninek.trainmate.api.dto.AddClaimedMusclesRequest;
 import de.oninek.trainmate.api.dto.CreateExerciseRequest;
 import de.oninek.trainmate.api.dto.ExerciseResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.http.HttpHeaders.LOCATION;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -30,6 +33,14 @@ public interface ExerciseController {
     ResponseEntity<ExerciseResponse> create(@RequestBody CreateExerciseRequest request);
 
     @Operation(summary = "Add claimed muscles")
-    @PostMapping("claimed-muscles/{id}")
+    @PostMapping("{id}/claimed-muscles")
     ResponseEntity<ExerciseResponse> addClaimedMuscles(@PathVariable Long id, @RequestBody AddClaimedMusclesRequest request);
+
+    @PageableAsQueryParam
+    @GetMapping
+    ResponseEntity<Page<ExerciseResponse>> findMany(
+            @RequestParam(name = "claimed-muscle-groups", required = false) List<Long> claimedMuscleGroupIds,
+            @RequestParam(name = "main-muscles", required = false) List<Long> mainMuscleIds,
+            @RequestParam(name = "support-muscles", required = false) List<Long> supportMuscleIds,
+            @Parameter(hidden = true) Pageable pageable);
 }

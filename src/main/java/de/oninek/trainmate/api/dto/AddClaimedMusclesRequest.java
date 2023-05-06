@@ -4,5 +4,5 @@ import de.oninek.trainmate.api.persistance.entity.MuscleIntensity;
 
 import java.util.*;
 
-public record AddClaimedMusclesRequest(Map<MuscleIntensity, Set<Long> > claimedMuscles) {
+public record AddClaimedMusclesRequest(MuscleIntensity intensity, Long claimedMuscleId) {
 }
