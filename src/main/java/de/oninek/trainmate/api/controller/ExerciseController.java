@@ -37,6 +37,7 @@ public interface ExerciseController {
     ResponseEntity<ExerciseResponse> addClaimedMuscles(@PathVariable Long id, @RequestBody AddClaimedMusclesRequest request);
 
     @PageableAsQueryParam
+    @Operation(summary = "Find many", operationId = "findManyExercises")
     @GetMapping
     ResponseEntity<Page<ExerciseResponse>> findMany(
             @RequestParam(name = "claimed-muscle-groups", required = false) List<Long> claimedMuscleGroupIds,

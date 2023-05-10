@@ -13,6 +13,6 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .components(new Components())
-                .info(new Info().title("TrainMate API"));
+                .info(new Info().title("TrainMate API").version("0.1"));
     }
 }
