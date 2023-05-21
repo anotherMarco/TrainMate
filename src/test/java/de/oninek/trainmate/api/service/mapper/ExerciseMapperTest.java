@@ -11,12 +11,9 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
-
 import static de.oninek.trainmate.api.persistance.entity.MuscleIntensity.MAIN;
 import static de.oninek.trainmate.api.persistance.entity.MuscleIntensity.SUPPORT;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.entry;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class ExerciseMapperTest {
@@ -51,7 +48,9 @@ class ExerciseMapperTest {
         assertThat(actual.name()).isEqualTo(exerciseEntity.getName());
         assertThat(actual.equipments()).hasSize(exerciseEntity.getEquipments().size());
         assertThat(actual.equipments()).contains("Weights");
-        assertThat(actual.claimedMuscles()).hasSize(exerciseEntity.getClaimedMuscles().size());
-        assertThat(actual.claimedMuscles()).contains(entry(MAIN, Set.of("Chest")), entry(SUPPORT, Set.of("Legs")));
+        assertThat(actual.mainMuscles()).hasSize(1);
+        assertThat(actual.mainMuscles()).hasSize(1);
+        assertThat(actual.mainMuscles()).containsExactly("Chest");
+        assertThat(actual.supportedMuscles()).containsExactly("Legs");
     }
 }

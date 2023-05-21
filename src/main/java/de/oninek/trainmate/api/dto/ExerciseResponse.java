@@ -1,10 +1,10 @@
 package de.oninek.trainmate.api.dto;
 
-import de.oninek.trainmate.api.persistance.entity.MuscleIntensity;
-
-import java.util.Map;
 import java.util.Set;
 
-public record ExerciseResponse(Long id, String name, Map<MuscleIntensity, Set<String>> claimedMuscles,
+public record ExerciseResponse(Long id,
+                               String name,
+                               Set<String> mainMuscles,
+                               Set<String> supportedMuscles,
                                Set<String> equipments) {
 }

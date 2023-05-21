@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static de.oninek.trainmate.api.persistance.entity.MuscleIntensity.MAIN;
+import static de.oninek.trainmate.api.persistance.entity.MuscleIntensity.SUPPORT;
+
 public class ExerciseBuilder {
     private Long id = 1L;
     private LocalDateTime createdAt = LocalDateTime.of(2023, 12, 25, 12, 0);
@@ -42,11 +45,15 @@ public class ExerciseBuilder {
                         Collectors.mapping(claimedMuscleEntity -> claimedMuscleEntity.getMuscle().getName(),
                                 Collectors.toSet())));
 
+        Set<String> mainMuscles = Optional.ofNullable(claimedMuscles.get(MAIN)).orElse(Collections.emptySet());
+        Set<String> supportedMuscles = Optional.ofNullable(claimedMuscles.get(SUPPORT)).orElse(Collections.emptySet()) ;
+
         Set<String> equipments = this.equipments.stream()
                 .map(EquipmentBuilder::buildEntity)
                 .map(EquipmentEntity::getName)
                 .collect(Collectors.toSet());
-        return new ExerciseResponse(id, name, claimedMuscles, equipments);
+
+        return new ExerciseResponse(id, name, mainMuscles, supportedMuscles, equipments);
     }
 
     public ExerciseBuilder setId(Long id) {
