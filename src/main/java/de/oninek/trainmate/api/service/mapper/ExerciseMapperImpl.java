@@ -8,9 +8,14 @@ import de.oninek.trainmate.api.persistance.entity.ExerciseEntity;
 import de.oninek.trainmate.api.persistance.entity.MuscleIntensity;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static de.oninek.trainmate.api.persistance.entity.MuscleIntensity.MAIN;
+import static de.oninek.trainmate.api.persistance.entity.MuscleIntensity.SUPPORT;
 
 @Component
 public class ExerciseMapperImpl implements ExerciseMapper {
@@ -25,7 +30,9 @@ public class ExerciseMapperImpl implements ExerciseMapper {
     public ExerciseResponse entityToResponse(ExerciseEntity entity) {
         Map<MuscleIntensity, Set<String>> muscleIntensitySetMap = entity.getClaimedMuscles().stream()
                 .collect(Collectors.groupingBy(ClaimedMuscleEntity::getIntensity, Collectors.mapping(claimedMuscleEntity -> claimedMuscleEntity.getMuscle().getName(), Collectors.toSet())));
+        Set<String> mainMuscles = Optional.ofNullable(muscleIntensitySetMap.get(MAIN)).orElse(Collections.emptySet());
+        Set<String> supportedMuscles = Optional.ofNullable(muscleIntensitySetMap.get(SUPPORT)).orElse(Collections.emptySet());
         Set<String> equipments = entity.getEquipments().stream().map(EquipmentEntity::getName).collect(Collectors.toSet());
-        return new ExerciseResponse(entity.getId(), entity.getName(), muscleIntensitySetMap, equipments);
+        return new ExerciseResponse(entity.getId(), entity.getName(), mainMuscles, supportedMuscles, equipments);
     }
 }

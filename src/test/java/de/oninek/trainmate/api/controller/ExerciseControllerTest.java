@@ -57,8 +57,8 @@ class ExerciseControllerTest {
                     .andExpect(jsonPath("$.id").value(exerciseResponse.id()))
                     .andExpect(jsonPath("$.name").value(exerciseResponse.name()))
                     .andExpect(jsonPath("$.name").value(exerciseResponse.name()))
-                    .andExpect(jsonPath("$.claimedMuscles").isMap())
-                    .andExpect(jsonPath("$.equipments").isArray());
+                    .andExpect(jsonPath("$.mainMuscles").isArray())
+                    .andExpect(jsonPath("$.supportedMuscles").isArray());
         }
     }
 

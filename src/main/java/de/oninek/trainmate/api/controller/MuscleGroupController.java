@@ -1,6 +1,6 @@
 package de.oninek.trainmate.api.controller;
 
-import de.oninek.trainmate.api.dto.MuscleResponse;
+import de.oninek.trainmate.api.dto.MuscleGroupResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -10,17 +10,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-@Tag(name = "muscles")
-@RequestMapping("muscles")
-public interface MuscleController {
+@Tag(name = "muscle-groups")
+@RequestMapping("muscle-groups")
+public interface MuscleGroupController {
 
     @PageableAsQueryParam
-    @Operation(summary = "find many", operationId = "findManyMuscles")
+    @Operation(summary = "Find many", operationId = "findManyMuscleGroups")
     @GetMapping
-    ResponseEntity<Page<MuscleResponse>> findMany(
-            @RequestParam(name = "muscle-group-id", required = false) Long muscleGroupId,
-            @Parameter(hidden = true)
-            Pageable pageable);
+    ResponseEntity<Page<MuscleGroupResponse>> findMany(@Parameter(hidden = true) Pageable pageable);
 }
