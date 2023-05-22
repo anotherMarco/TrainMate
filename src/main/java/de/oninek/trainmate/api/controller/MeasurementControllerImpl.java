@@ -17,7 +17,7 @@ public class MeasurementControllerImpl implements MeasurementController {
     private final BodyMeasurementService service;
 
     @Override
-    public ResponseEntity<BodyMeasurementResponse> save(long userId, CreateBodyMeasurementRequest request) {
+    public ResponseEntity<BodyMeasurementResponse> create(long userId, CreateBodyMeasurementRequest request) {
         BodyMeasurementResponse response = service.save(userId,request);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(response.id()).toUri();
         return ResponseEntity.created(uri).body(response);

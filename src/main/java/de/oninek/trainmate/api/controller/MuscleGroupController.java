@@ -1,6 +1,7 @@
 package de.oninek.trainmate.api.controller;
 
 import de.oninek.trainmate.api.dto.MuscleGroupResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.core.converters.models.PageableAsQueryParam;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface MuscleGroupController {
 
     @PageableAsQueryParam
+    @Operation(summary = "Find many", operationId = "findManyMuscleGroups")
     @GetMapping
     ResponseEntity<Page<MuscleGroupResponse>> findMany(@Parameter(hidden = true) Pageable pageable);
 }

@@ -24,7 +24,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("exercises")
 public interface ExerciseController {
 
-    @Operation(summary = "Create exercise")
+    @Operation(summary = "Create exercise", operationId = "createExercise")
     @ApiResponse(responseCode = "201", description = "Exercise successfully created",
             headers = {@Header(name = LOCATION, description = "The uri of the created resource")},
             content = @Content(mediaType = APPLICATION_JSON_VALUE)
@@ -32,7 +32,7 @@ public interface ExerciseController {
     @PostMapping
     ResponseEntity<ExerciseResponse> create(@RequestBody CreateExerciseRequest request);
 
-    @Operation(summary = "Add claimed muscles")
+    @Operation(summary = "Add claimed muscles", operationId = "addClaimedMuscles")
     @PostMapping("{id}/claimed-muscles")
     ResponseEntity<ExerciseResponse> addClaimedMuscles(@PathVariable Long id, @RequestBody AddClaimedMusclesRequest request);
 
