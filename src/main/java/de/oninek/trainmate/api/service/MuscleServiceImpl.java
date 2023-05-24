@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class MuscleServiceImpl implements MuscleService {
@@ -16,8 +18,13 @@ public class MuscleServiceImpl implements MuscleService {
     private final MuscleMapper muscleMapper;
 
     @Override
-    public Page<MuscleResponse> findMany(Long muscleGroupId, Pageable pageable) {
-        return muscleRepository.findAllByMuscleGroupIdOrFindAll(pageable, muscleGroupId).
-                map(muscleMapper::entityToResponse);
+    public Page<MuscleResponse> findMany(List<Long> muscleGroupIds, Pageable pageable) {
+        if (muscleGroupIds == null || muscleGroupIds.isEmpty()) {
+            return muscleRepository.findAll(pageable)
+                    .map(muscleMapper::entityToResponse);
+        }
+        return muscleRepository.findAllByMuscleGroupIdIn(pageable, muscleGroupIds)
+                .map(muscleMapper::entityToResponse);
+
     }
 }

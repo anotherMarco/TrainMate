@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Tag(name = "muscles")
 @RequestMapping("muscles")
 public interface MuscleController {
@@ -20,7 +22,7 @@ public interface MuscleController {
     @Operation(summary = "find many", operationId = "findManyMuscles")
     @GetMapping
     ResponseEntity<Page<MuscleResponse>> findMany(
-            @RequestParam(name = "muscle-group-id", required = false) Long muscleGroupId,
+            @RequestParam(name = "muscle-group-id", required = false) List<Long> muscleGroupIds,
             @Parameter(hidden = true)
             Pageable pageable);
 }

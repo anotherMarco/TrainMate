@@ -8,14 +8,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 public class MuscleControllerImpl implements MuscleController {
 
     private final MuscleService muscleService;
     @Override
-    public ResponseEntity<Page<MuscleResponse>> findMany(Long muscleGroupId, Pageable pageable) {
-        Page<MuscleResponse> muscles = muscleService.findMany(muscleGroupId, pageable);
+    public ResponseEntity<Page<MuscleResponse>> findMany(List<Long> muscleGroupIds, Pageable pageable) {
+        Page<MuscleResponse> muscles = muscleService.findMany(muscleGroupIds, pageable);
         return ResponseEntity.ok(muscles);
     }
 }
