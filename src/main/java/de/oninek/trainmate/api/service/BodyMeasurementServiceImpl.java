@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class BodyMeasurementServiceImpl implements BodyMeasurementService {
+class BodyMeasurementServiceImpl implements BodyMeasurementService {
 
     private final BodyMeasurementMapper bodyMeasurementMapper;
     private final UserRepository userRepository;

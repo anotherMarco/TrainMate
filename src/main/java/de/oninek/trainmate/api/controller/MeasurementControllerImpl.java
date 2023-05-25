@@ -12,7 +12,7 @@ import java.net.URI;
 
 @RequiredArgsConstructor
 @RestController
-public class MeasurementControllerImpl implements MeasurementController {
+class MeasurementControllerImpl implements MeasurementController {
 
     private final BodyMeasurementService service;
 

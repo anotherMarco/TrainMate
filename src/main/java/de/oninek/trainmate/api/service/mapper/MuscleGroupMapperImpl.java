@@ -5,7 +5,7 @@ import de.oninek.trainmate.api.persistance.entity.MuscleGroupEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MuscleGroupMapperImpl implements MuscleGroupMapper {
+class MuscleGroupMapperImpl implements MuscleGroupMapper {
     @Override
     public MuscleGroupResponse entityToResponse(MuscleGroupEntity entity) {
         return new MuscleGroupResponse(entity.getId(), entity.getName());

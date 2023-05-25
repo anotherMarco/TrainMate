@@ -16,7 +16,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-public class ExerciseControllerImpl implements ExerciseController {
+class ExerciseControllerImpl implements ExerciseController {
 
     private final ExerciseService exerciseService;
     @Override

@@ -21,7 +21,7 @@ import static de.oninek.trainmate.api.persistance.repository.ExerciseRepository.
 
 @RequiredArgsConstructor
 @Service
-public class ExerciseServiceImpl implements ExerciseService {
+class ExerciseServiceImpl implements ExerciseService {
 
     private final ExerciseRepository exerciseRepository;
     private final MuscleRepository muscleRepository;

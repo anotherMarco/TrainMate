@@ -12,7 +12,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class MuscleServiceImpl implements MuscleService {
+class MuscleServiceImpl implements MuscleService {
 
     private final MuscleRepository muscleRepository;
     private final MuscleMapper muscleMapper;

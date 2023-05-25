@@ -6,7 +6,7 @@ import de.oninek.trainmate.api.persistance.entity.BodyMeasurementEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BodyMeasurementMapperImpl implements BodyMeasurementMapper {
+class BodyMeasurementMapperImpl implements BodyMeasurementMapper {
     @Override
     public BodyMeasurementResponse entityToResponse(BodyMeasurementEntity entity) {
       return new BodyMeasurementResponse(entity.getId(),

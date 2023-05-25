@@ -12,7 +12,7 @@ import java.util.Comparator;
 
 @Component
 @RequiredArgsConstructor
-public class UserMapperImpl implements UserMapper {
+class UserMapperImpl implements UserMapper {
 
     private final BodyMeasurementMapper bodyMeasurementMapper;
 

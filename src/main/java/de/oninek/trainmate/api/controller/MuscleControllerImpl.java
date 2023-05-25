@@ -12,7 +12,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-public class MuscleControllerImpl implements MuscleController {
+class MuscleControllerImpl implements MuscleController {
 
     private final MuscleService muscleService;
     @Override
