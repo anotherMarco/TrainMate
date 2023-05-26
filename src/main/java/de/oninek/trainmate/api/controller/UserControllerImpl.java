@@ -14,7 +14,7 @@ import java.net.URI;
 
 @RequiredArgsConstructor
 @RestController
-public class UserControllerImpl implements UserController {
+class UserControllerImpl implements UserController {
 
     private final UserService userService;
 

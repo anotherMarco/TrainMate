@@ -18,7 +18,7 @@ import static de.oninek.trainmate.api.persistance.entity.MuscleIntensity.MAIN;
 import static de.oninek.trainmate.api.persistance.entity.MuscleIntensity.SUPPORT;
 
 @Component
-public class ExerciseMapperImpl implements ExerciseMapper {
+class ExerciseMapperImpl implements ExerciseMapper {
     @Override
     public ExerciseEntity requestToEntity(CreateExerciseRequest request) {
         ExerciseEntity exerciseEntity = new ExerciseEntity();

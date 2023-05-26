@@ -5,7 +5,7 @@ import de.oninek.trainmate.api.persistance.entity.MuscleEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MuscleMapperImpl implements MuscleMapper {
+class MuscleMapperImpl implements MuscleMapper {
     @Override
     public MuscleResponse entityToResponse(MuscleEntity entity) {
         return new MuscleResponse(entity.getId(),

@@ -5,16 +5,10 @@ import de.oninek.trainmate.api.persistance.entity.MuscleEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface MuscleRepository extends TrainMateRepository<MuscleEntity> {
-    Page<MuscleEntity> findAllByMuscleGroupId(Pageable pageable, Long muscleGroupId);
-
-    default Page<MuscleEntity> findAllByMuscleGroupIdOrFindAll(Pageable pageable, Long muscleGroupId) {
-        return Optional.ofNullable(muscleGroupId)
-                .map(id -> findAllByMuscleGroupId(pageable, id))
-                .orElseGet(() -> findAll(pageable));
-    }
+    Page<MuscleEntity> findAllByMuscleGroupIdIn(Pageable pageable, List<Long> muscleGroupIds);
 
     default MuscleEntity findByIdOrThrow(Long id) {
         return findById(id).orElseThrow(() -> new MuscleNotFoundException(id));
