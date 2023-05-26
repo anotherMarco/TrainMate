@@ -25,6 +25,5 @@ class MuscleServiceImpl implements MuscleService {
         }
         return muscleRepository.findAllByMuscleGroupIdIn(pageable, muscleGroupIds)
                 .map(muscleMapper::entityToResponse);
-
     }
 }
