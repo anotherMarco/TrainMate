@@ -14,6 +14,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
     private final EquipmentRepository repository;
     private final EquipmentMapper mapper;
+
     @Override
     public Page<EquipmentResponse> findMany(Pageable pageable) {
         return repository.findAll(pageable).map(mapper::entityToResponse);
