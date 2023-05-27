@@ -5,6 +5,7 @@ import de.oninek.trainmate.api.persistance.entity.ClaimedMuscleEntity;
 import de.oninek.trainmate.api.persistance.entity.MuscleIntensity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static de.oninek.trainmate.api.persistance.entity.MuscleIntensity.MAIN;
 
@@ -57,7 +58,7 @@ public class ClaimedMuscleBuilder {
     }
 
     public AddClaimedMusclesRequest buildAddRequest() {
-        return new AddClaimedMusclesRequest(muscleIntensity, muscleBuilder.buildEntity().getId());
+        return new AddClaimedMusclesRequest(muscleIntensity, List.of(muscleBuilder.buildEntity().getId()));
     }
 
 }

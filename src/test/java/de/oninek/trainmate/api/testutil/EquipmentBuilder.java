@@ -1,8 +1,10 @@
 package de.oninek.trainmate.api.testutil;
 
+import de.oninek.trainmate.api.dto.AddEquipmentsRequest;
 import de.oninek.trainmate.api.persistance.entity.EquipmentEntity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class EquipmentBuilder {
     private Long id = 1L;
@@ -17,6 +19,10 @@ public class EquipmentBuilder {
         equipmentEntity.setCreatedAt(createdAt);
         equipmentEntity.setUpdatedAt(updatedAt);
         return equipmentEntity;
+    }
+
+    public AddEquipmentsRequest buildRequest() {
+       return new AddEquipmentsRequest(List.of(id));
     }
 
     public EquipmentBuilder setId(Long id) {

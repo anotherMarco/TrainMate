@@ -1,7 +1,6 @@
 package de.oninek.trainmate.api.testutil;
 
 import de.oninek.trainmate.api.persistance.entity.MuscleEntity;
-import de.oninek.trainmate.api.MuscleGroupBuilder;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +9,7 @@ public class MuscleBuilder {
     private LocalDateTime createdAt = LocalDateTime.of(2023, 12, 25, 12, 0);
     private LocalDateTime updatedAt = LocalDateTime.of(2023, 12, 25, 12, 0);
     private String name;
-    private MuscleGroupBuilder muscleGroup;
+    private MuscleGroupBuilder muscleGroup = new MuscleGroupBuilder();
 
     public MuscleEntity buildEntity() {
         MuscleEntity muscleEntity = new MuscleEntity();
