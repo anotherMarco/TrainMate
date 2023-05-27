@@ -1,6 +1,5 @@
-package de.oninek.trainmate.api;
+package de.oninek.trainmate.api.testutil;
 
-import de.oninek.trainmate.api.testutil.MuscleBuilder;
 import de.oninek.trainmate.api.persistance.entity.MuscleGroupEntity;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,7 @@
 package de.oninek.trainmate.api.controller;
 
 import de.oninek.trainmate.api.dto.AddClaimedMusclesRequest;
+import de.oninek.trainmate.api.dto.AddEquipmentsRequest;
 import de.oninek.trainmate.api.dto.CreateExerciseRequest;
 import de.oninek.trainmate.api.dto.ExerciseResponse;
 import de.oninek.trainmate.api.service.ExerciseService;
@@ -30,6 +31,13 @@ class ExerciseControllerImpl implements ExerciseController {
     public ResponseEntity<ExerciseResponse> addClaimedMuscles(Long id, AddClaimedMusclesRequest request) {
         ExerciseResponse exerciseResponse = exerciseService.addClaimedMuscle(id, request);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}/claimed-muscles").buildAndExpand(id).toUri();
+        return ResponseEntity.created(uri).body(exerciseResponse);
+    }
+
+    @Override
+    public ResponseEntity<ExerciseResponse> addEquipments(Long id, AddEquipmentsRequest request) {
+        ExerciseResponse exerciseResponse = exerciseService.addEquipment(id, request);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}/equipments").buildAndExpand(id).toUri();
         return ResponseEntity.created(uri).body(exerciseResponse);
     }
 

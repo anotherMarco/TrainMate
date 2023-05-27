@@ -1,6 +1,7 @@
 package de.oninek.trainmate.api.service;
 
 import de.oninek.trainmate.api.dto.AddClaimedMusclesRequest;
+import de.oninek.trainmate.api.dto.AddEquipmentsRequest;
 import de.oninek.trainmate.api.dto.CreateExerciseRequest;
 import de.oninek.trainmate.api.dto.ExerciseResponse;
 import de.oninek.trainmate.api.persistance.entity.ClaimedMuscleEntity;
@@ -37,13 +38,20 @@ class ExerciseServiceImpl implements ExerciseService {
     @Override
     public ExerciseResponse addClaimedMuscle(Long id, AddClaimedMusclesRequest request) {
         ExerciseEntity exercise = exerciseRepository.findByIdOrThrow(id);
-        MuscleEntity muscle = muscleRepository.findByIdOrThrow(request.claimedMuscleId());
-        ClaimedMuscleEntity claimedMuscleEntity = new ClaimedMuscleEntity();
-        claimedMuscleEntity.setMuscle(muscle);
-        claimedMuscleEntity.setIntensity(request.intensity());
-        exercise.addClaimedMuscle(claimedMuscleEntity);
+        var muscles = muscleRepository.findAllById(request.claimedMuscleIds());
+        for (MuscleEntity muscle : muscles) {
+            ClaimedMuscleEntity claimedMuscleEntity = new ClaimedMuscleEntity();
+            claimedMuscleEntity.setMuscle(muscle);
+            claimedMuscleEntity.setIntensity(request.intensity());
+            exercise.addClaimedMuscle(claimedMuscleEntity);
+        }
         ExerciseEntity saved = exerciseRepository.save(exercise);
         return exerciseMapper.entityToResponse(saved);
+    }
+
+    @Override
+    public ExerciseResponse addEquipment(Long id, AddEquipmentsRequest request) {
+        throw new RuntimeException();
     }
 
     @Override
