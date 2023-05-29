@@ -6,4 +6,5 @@ import de.oninek.trainmate.api.persistance.entity.EquipmentEntity;
 public interface EquipmentMapper {
 
     EquipmentResponse entityToResponse(EquipmentEntity entity);
+
 }

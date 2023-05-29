@@ -1,14 +1,14 @@
 package de.oninek.trainmate.api.service;
 
-import de.oninek.trainmate.api.dto.AddClaimedMusclesRequest;
-import de.oninek.trainmate.api.dto.AddEquipmentsRequest;
-import de.oninek.trainmate.api.dto.CreateExerciseRequest;
-import de.oninek.trainmate.api.dto.ExerciseResponse;
+import de.oninek.trainmate.api.dto.*;
 import de.oninek.trainmate.api.persistance.entity.ClaimedMuscleEntity;
+import de.oninek.trainmate.api.persistance.entity.EquipmentEntity;
 import de.oninek.trainmate.api.persistance.entity.ExerciseEntity;
 import de.oninek.trainmate.api.persistance.entity.MuscleEntity;
+import de.oninek.trainmate.api.persistance.repository.EquipmentRepository;
 import de.oninek.trainmate.api.persistance.repository.ExerciseRepository;
 import de.oninek.trainmate.api.persistance.repository.MuscleRepository;
+import de.oninek.trainmate.api.service.mapper.EquipmentMapper;
 import de.oninek.trainmate.api.service.mapper.ExerciseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,6 +26,7 @@ class ExerciseServiceImpl implements ExerciseService {
 
     private final ExerciseRepository exerciseRepository;
     private final MuscleRepository muscleRepository;
+    private final EquipmentRepository equipmentRepository;
     private final ExerciseMapper exerciseMapper;
 
     @Override
@@ -51,7 +52,13 @@ class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public ExerciseResponse addEquipment(Long id, AddEquipmentsRequest request) {
-        throw new RuntimeException();
+        ExerciseEntity exercise = exerciseRepository.findByIdOrThrow(id);
+        Iterable<EquipmentEntity> equipments = equipmentRepository.findAllById(request.ids());
+        for (EquipmentEntity equipment : equipments) {
+            exercise.addEquipment(equipment);
+        }
+        exerciseRepository.save(exercise);
+        return exerciseMapper.entityToResponse(exercise);
     }
 
     @Override

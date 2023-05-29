@@ -35,6 +35,10 @@ public class ExerciseEntity extends BaseEntity {
         claimedMuscles.add(claimedMuscle);
     }
 
+    public void addEquipment(EquipmentEntity equipment) {
+        equipments.add(equipment);
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
