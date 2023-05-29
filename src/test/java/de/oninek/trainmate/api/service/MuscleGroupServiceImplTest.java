@@ -35,7 +35,7 @@ class MuscleGroupServiceImplTest {
     @Spy
     private MuscleGroupMapper muscleGroupMapper;
 
-    MuscleGroupBuilder builder;
+   private MuscleGroupBuilder builder;
 
 
     @BeforeEach

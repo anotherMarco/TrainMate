@@ -49,6 +49,4 @@ class ExerciseControllerImpl implements ExerciseController {
         Page<ExerciseResponse> response = exerciseService.findMany(claimedMuscleGroupIds, mainMuscleIds, supportMuscleIds, pageable);
         return ResponseEntity.ok(response);
     }
-
-
 }
