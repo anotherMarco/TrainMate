@@ -3,6 +3,7 @@ package de.oninek.trainmate.api.persistance.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -13,6 +14,7 @@ import static jakarta.persistence.CascadeType.MERGE;
 @Setter
 @Entity
 @Table(name = "exercises")
+@ComponentScan
 public class ExerciseEntity extends BaseEntity {
 
     @Column(name = "name", nullable = false, unique = true)

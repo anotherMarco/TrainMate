@@ -3,12 +3,17 @@ package de.oninek.trainmate.api.controller;
 import de.oninek.trainmate.api.dto.TrainingPlanRequest;
 import de.oninek.trainmate.api.dto.TrainingPlanResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.headers.Header;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springdoc.core.converters.models.PageableAsQueryParam;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,6 +23,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Tag(name = "TrainingPlans")
 @RequestMapping("training-plans")
 public interface TrainingPlanController {
+
+    @PageableAsQueryParam
+    @GetMapping
+    ResponseEntity<Page<TrainingPlanResponse>> findMany(@Parameter(hidden = true) Pageable page);
 
     @Operation(summary = "Create a training plan", operationId = "createTrainingPlan")
     @ApiResponse(responseCode = "201", description = "Training Plan successfully created",
