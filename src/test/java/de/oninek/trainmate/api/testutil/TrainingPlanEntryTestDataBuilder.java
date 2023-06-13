@@ -74,8 +74,7 @@ public class TrainingPlanEntryTestDataBuilder {
         return entity;
     }
 
-    public TrainingPlanEntryRequest buildResponse() {
-        ExerciseResponse exerciseResponse = exerciseBuilder != null ? exerciseBuilder.buildResponse() : null;
+    public TrainingPlanEntryRequest buildRequest() {
 
         return new TrainingPlanEntryRequest(ordinalNumber,
                 exerciseBuilder != null ? exerciseBuilder.getId() : null,

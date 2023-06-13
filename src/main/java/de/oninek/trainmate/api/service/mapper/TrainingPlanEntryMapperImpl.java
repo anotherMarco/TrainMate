@@ -23,7 +23,7 @@ public class TrainingPlanEntryMapperImpl implements TrainingPlanEntryMapper {
 
     @Override
     public List<TrainingPlanEntryEntity> toEntityList(List<TrainingPlanEntryRequest> requests) {
-        return null;
+        return requests.stream().map(this::toEntity).toList();
     }
 
     @Override
