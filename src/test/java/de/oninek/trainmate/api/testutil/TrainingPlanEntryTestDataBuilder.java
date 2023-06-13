@@ -1,6 +1,5 @@
 package de.oninek.trainmate.api.testutil;
 
-import de.oninek.trainmate.api.dto.ExerciseResponse;
 import de.oninek.trainmate.api.dto.TrainingPlanEntryRequest;
 import de.oninek.trainmate.api.persistance.entity.RepetitionRange;
 import de.oninek.trainmate.api.persistance.entity.TrainingPlanEntryEntity;

@@ -40,4 +40,9 @@ public class TrainingPlanEntryMapperImpl implements TrainingPlanEntryMapper {
                 entity.getWeight(),
                 entity.getSeconds());
     }
+
+    @Override
+    public List<TrainingPlanEntryResponse> toResponseList(List<TrainingPlanEntryEntity> entities) {
+        return entities.stream().map(this::toResponse).toList();
+    }
 }

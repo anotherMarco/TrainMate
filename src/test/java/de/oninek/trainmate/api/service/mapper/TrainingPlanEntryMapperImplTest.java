@@ -45,6 +45,17 @@ class TrainingPlanEntryMapper_Test {
             assertThat(result.exerciseId()).isEqualTo(exercise.getId());
             assertThat(result.ordinalNumber()).isEqualTo(entity.getOrdinalNumber());
         }
+
+        @Test
+        void toResponseList() {
+            TrainingPlanEntryEntity entity1 = testData.setExerciseBuilder(new ExerciseBuilder()).buildEntity();
+            TrainingPlanEntryEntity entity2 = testData.setId(2L).setExerciseBuilder(new ExerciseBuilder()).buildEntity();
+            List<TrainingPlanEntryEntity> entities = List.of(entity1, entity2);
+
+            var result = entryMapper.toResponseList(entities);
+
+            assertThat(result).hasSize(entities.size());
+        }
     }
 
     @Nested

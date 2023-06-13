@@ -1,5 +1,6 @@
 package de.oninek.trainmate.api.service.mapper;
 
+import de.oninek.trainmate.api.dto.TrainingPlanEntryResponse;
 import de.oninek.trainmate.api.dto.TrainingPlanRequest;
 import de.oninek.trainmate.api.dto.TrainingPlanResponse;
 import de.oninek.trainmate.api.persistance.entity.TrainingPlanEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 public class TrainingPlanMapperImpl implements TrainingPlanMapper {
 
     private final TrainingPlanEntryMapper entryMapper;
+
     @Override
     public TrainingPlanEntity toEntity(TrainingPlanRequest request) {
         TrainingPlanEntity trainingPlanEntity = new TrainingPlanEntity();
@@ -25,6 +27,8 @@ public class TrainingPlanMapperImpl implements TrainingPlanMapper {
 
     @Override
     public TrainingPlanResponse toResponse(TrainingPlanEntity entity) {
-        throw new RuntimeException("Not implemented");
+        List<TrainingPlanEntryResponse> entries = entryMapper.toResponseList(entity.getEntries());
+
+        return new TrainingPlanResponse(entity.getId(), entity.getName(), entries);
     }
 }
