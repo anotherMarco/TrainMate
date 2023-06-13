@@ -7,6 +7,7 @@ public record TrainingPlanEntryResponse(
         String exerciseName,
         Integer minRepetitions,
         Integer maxRepetitions,
+        Integer sets,
         Integer weight,
         Integer seconds
 ) {

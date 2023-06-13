@@ -24,6 +24,9 @@ public class ExerciseBuilder {
 
     public ExerciseEntity buildEntity() {
         ExerciseEntity exerciseEntity = new ExerciseEntity();
+        exerciseEntity.setId(id);
+        exerciseEntity.setCreatedAt(createdAt);
+        exerciseEntity.setUpdatedAt(updatedAt);
         exerciseEntity.setName(name);
         for (ClaimedMuscleBuilder claimedMuscle : claimedMuscles) {
             exerciseEntity.getClaimedMuscles().add(claimedMuscle.buildEntity());
@@ -38,20 +41,37 @@ public class ExerciseBuilder {
         return new CreateExerciseRequest(name);
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<ClaimedMuscleBuilder> getClaimedMuscles() {
+        return claimedMuscles;
+    }
+
+    public List<EquipmentBuilder> getEquipments() {
+        return equipments;
+    }
+
     public ExerciseResponse buildResponse() {
-        Map<MuscleIntensity, Set<String>> claimedMuscles = this.claimedMuscles.stream().map(ClaimedMuscleBuilder::buildEntity)
-                .collect(Collectors.groupingBy(
-                        ClaimedMuscleEntity::getIntensity,
-                        Collectors.mapping(claimedMuscleEntity -> claimedMuscleEntity.getMuscle().getName(),
-                                Collectors.toSet())));
+        Map<MuscleIntensity, Set<String>> claimedMuscles = this.claimedMuscles.stream().map(ClaimedMuscleBuilder::buildEntity).collect(Collectors.groupingBy(ClaimedMuscleEntity::getIntensity, Collectors.mapping(claimedMuscleEntity -> claimedMuscleEntity.getMuscle().getName(), Collectors.toSet())));
 
         Set<String> mainMuscles = Optional.ofNullable(claimedMuscles.get(MAIN)).orElse(Collections.emptySet());
-        Set<String> supportedMuscles = Optional.ofNullable(claimedMuscles.get(SUPPORT)).orElse(Collections.emptySet()) ;
+        Set<String> supportedMuscles = Optional.ofNullable(claimedMuscles.get(SUPPORT)).orElse(Collections.emptySet());
 
-        Set<String> equipments = this.equipments.stream()
-                .map(EquipmentBuilder::buildEntity)
-                .map(EquipmentEntity::getName)
-                .collect(Collectors.toSet());
+        Set<String> equipments = this.equipments.stream().map(EquipmentBuilder::buildEntity).map(EquipmentEntity::getName).collect(Collectors.toSet());
 
         return new ExerciseResponse(id, name, mainMuscles, supportedMuscles, equipments);
     }

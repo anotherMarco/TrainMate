@@ -1,6 +1,7 @@
 package de.oninek.trainmate.api.controller;
 
 import de.oninek.trainmate.api.dto.TrainingPlanEntryRequest;
+import de.oninek.trainmate.api.dto.TrainingPlanEntryResponse;
 import de.oninek.trainmate.api.dto.TrainingPlanRequest;
 import de.oninek.trainmate.api.dto.TrainingPlanResponse;
 import de.oninek.trainmate.api.service.TrainingPlanService;
@@ -23,6 +24,11 @@ public class TrainingPlanControllerImpl implements TrainingPlanController {
     public ResponseEntity<Page<TrainingPlanResponse>> findMany(Pageable pageable) {
         Page<TrainingPlanResponse> responses = trainingPlanService.findMany(pageable);
         return ResponseEntity.ok(responses);
+    }
+
+    @Override
+    public ResponseEntity<TrainingPlanEntryResponse> addEntry(TrainingPlanEntryRequest request) {
+        return null;
     }
 
     @Override

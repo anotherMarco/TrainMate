@@ -19,6 +19,7 @@ public class TrainingPlanEntryEntity extends BaseEntity{
     private ExerciseEntity exercise;
     @Embedded
     private RepetitionRange repetitions;
+    private int sets;
     private Integer weight;
     private Integer seconds;
 

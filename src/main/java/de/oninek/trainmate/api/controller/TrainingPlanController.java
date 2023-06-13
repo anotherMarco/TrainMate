@@ -1,5 +1,7 @@
 package de.oninek.trainmate.api.controller;
 
+import de.oninek.trainmate.api.dto.TrainingPlanEntryRequest;
+import de.oninek.trainmate.api.dto.TrainingPlanEntryResponse;
 import de.oninek.trainmate.api.dto.TrainingPlanRequest;
 import de.oninek.trainmate.api.dto.TrainingPlanResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,6 +29,15 @@ public interface TrainingPlanController {
     @PageableAsQueryParam
     @GetMapping
     ResponseEntity<Page<TrainingPlanResponse>> findMany(@Parameter(hidden = true) Pageable page);
+
+
+    @Operation(summary = "Add a training entry", operationId = "addTrainingPlanEntry")
+    @ApiResponse(responseCode = "201", description = "Training Plan successfully created",
+            headers = {@Header(name = LOCATION, description = "The uri of the created resource")},
+            content = @Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = TrainingPlanEntryResponse.class))
+    )
+    @PostMapping
+    ResponseEntity<TrainingPlanEntryResponse> addEntry(TrainingPlanEntryRequest request);
 
     @Operation(summary = "Create a training plan", operationId = "createTrainingPlan")
     @ApiResponse(responseCode = "201", description = "Training Plan successfully created",

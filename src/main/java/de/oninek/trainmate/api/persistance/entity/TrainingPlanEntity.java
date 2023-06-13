@@ -21,4 +21,14 @@ public class TrainingPlanEntity extends BaseEntity {
     @OneToMany(mappedBy = "trainingPlanEntity", orphanRemoval = true)
     @OrderColumn(name = "ordinalNumber")
     private List<TrainingPlanEntryEntity> entries = new ArrayList<>();
+
+    public void addEntry(TrainingPlanEntryEntity entry) {
+        entries.add(entry);
+        entry.setTrainingPlanEntity(this);
+    }
+
+    public void removeEntry(TrainingPlanEntryEntity entry) {
+        entries.remove(entry);
+        entry.setTrainingPlanEntity(null);
+    }
 }
